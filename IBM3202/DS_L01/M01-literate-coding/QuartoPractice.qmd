@@ -1,0 +1,77 @@
+---
+title: "Farm store and Penquins"
+subtitle: "get started with quarto"
+author: "Allen Cosme"
+format: 
+  html:
+    theme: cosmo
+    toc: true
+    toc-location: right-body
+    toc-depth: 3
+    embed-resources: true
+editor: visual
+---
+
+# **Farm Store**
+
+CPP Farm store has a selected assortment of cool fruits and vegetables right from its on-campus farm.
+
+## **Featured Products:**
+
+Illustration of Multiple columns on a website
+
+![Figure 1: A sample of gift-pack prepared from CPP Grown produce](images/gift-pack2022-03.jpg){#fig-orange}
+
+Great gift for your loved ones. These fruits were raised by students in agriculture majors on CPP campus, processed and packed by student employees at Farm Store.
+
+![Figure 2: A sample of wine made from grapes grown right here on campus](images/2022-hv-zin-rose-755x325-01.jpg){#fig-rose}
+
+Fantastic wine produced right here CPP campus by students!
+
+:::: columns
+::: {.column width="48%"}
+![Figure 1: A sample of gift-pack prepared from CPP Grown produce](images/gift-pack2022-03.jpg)
+
+Great gift for your loved ones. These fruits were raised by students in agriculture majors on CPP campus, processed and packed by student employees at Farm Store.
+:::
+::::
+
+:::: columns
+::: {.column width="48%"}
+![Figure 2: A sample of wine made from grapes grown right here on campus](images/2022-hv-zin-rose-755x325-01.jpg)
+
+Fantastic wine produced right here CPP campus by students!
+:::
+::::
+
+## **Web site menu**
+
+Use `panel-tabset` to add multiple tabs to your website.
+
+::: panel-tabset
+## Fruit gifts
+
+![A Sample of gift-pack prepared from CPP-grown produce](images/gift-pack2022-02.jpg)
+
+## Rose wine
+
+![A sample of wine made from grapes grown right here on campus](images/2022-hv-zin-rose-755x325-02.jpg)
+:::
+
+For a beautiful graphic of the orange gift set, see @Fig-orange
+
+## Data Analysis
+
+First, we need to:
+
+1.  load packages
+
+2.  import data
+
+3.  check data
+
+### Choosing data
+
+Penguins are very cute !
+
+... so lets

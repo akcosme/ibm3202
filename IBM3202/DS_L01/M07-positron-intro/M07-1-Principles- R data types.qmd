@@ -1,0 +1,15 @@
+---
+title: "M07-1-Principles: R Data Types"
+author: Allen Cosme
+date: '`r format(Sys.time())`'
+format: 
+    html:
+        toc: true
+        toc-depth: 4
+        number-sections: true
+        code-link: true
+        embed-resources: true
+editor: visual
+execute: 
+  freeze: auto
+---

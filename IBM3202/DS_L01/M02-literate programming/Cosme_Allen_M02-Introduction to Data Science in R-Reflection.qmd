@@ -1,0 +1,118 @@
+---
+title: "M02-Introduction to Data Science in R-Reflection"
+author: Allen Cosme
+date: "`r format(Sys.time())`"
+format: 
+  html:
+    toc: true
+    toc-depth: 4
+    toc-expand: false
+    number-sections: true
+    theme: 
+      light: cosmo
+      dark: darkly
+    code-tools: true
+    code-link: false
+    code-fold: true
+    code-overflow: scroll
+    embed-resources: true
+editor: visual
+execute: 
+  freeze: auto
+  editor: visual
+---
+
+## New things I learned in this module about reproducible data science and literate coding.
+
+In Qurato documents, you can see the source code and see how the document was created and formated on a deeper level. I also learned that you can toggle what your HTML document looks like with a switch (changing from white background to a dark one).
+
+Some quick formatting examples I can use in Quarto:
+
+-   **Bold text**
+
+-   *Italic text*
+
+-   ~~Strikethrough~~
+
+-   Inline code
+
+-   Underlined text (HTML)
+
+> Blockquote example: Reproducible work makes it easier for someone else (or future me) to rerun the same workflow and confirm results.
+
+I learned what it means to have reproducible data versus replicable data. In data science reproducible is an output that yields the same results while the source code and data remain unchanged. Replicable is when output remains the same while the data is changing. Tools like R Markdown or Jupyter Notebooks combine code with natural language (prose), explaining the "why" behind the analysis rather than just the "how"
+
+::: callout-note
+With the use of scripts in R or python you can make data visualization much faster. You can also go use Github for collaboration and archival, also allowing for version control.
+:::
+
+## Do you see yourself using Quarto every day for your job or study? Summarize the instructor's lecture about Quarto that you found impressive.
+
+I do not see myself using quarto for work or study. Quarto has too much control for documents that I would not know how to fully utilize. My overall workflow is not suited for quarto, since I do almost everything over the cloud and often share files with other people.
+
+## What do you think about reproducible crisis in your field? How can Quarto help address the concerns you have about reproducibility in the line of your work?
+
+I do not think there is a reproducible crisis in any industry when it comes to data and reporting. Data is being added and subtracted at a blistering rate, so much so that it is difficult to keep up with. Even with highly advance software tools, we are not able to update at the speed and sheer amount that is being shared.
+
+## what you learned in this module about the Tidyverse ecosystem in R. What can you do with R?
+
+The Tidyverse is an opinionated collection of R packages specifically designed for data science and analytics. All packages within this ecosystem share an underlying design philosophy, grammar, and data structure, ensuring consistency across different stages of data analysis. The core packages include: readr: For importing data into R.
+
+::: panel-tabset
+## core packages
+
+-   tidyr: For cleaning and tidying data.
+
+-   dplyr: For transforming and manipulating data using a "verb-based" grammar.
+
+-   ggplot2: For creating robust and high-quality data visualizations.
+
+## why does this matter?
+
+Using R and the Tidyverse, you can perform a complete end-to-end data science workflow:
+
+-   **Import Data**
+
+-   **Tidy and Clean Data**
+
+-   **Transform Data**
+
+-   **Visualize Data**
+
+-   **Conduct Reproducible Research**
+
+-   **Chain Operations Logically**
+:::
+
+##choose two packages beyond the Tidyverse ecosystem, base R, and Quarto that could enhance your job/career.
+
+Beyond the Tidyverse, base R, and Quarto, the following two packages from the video are particularly valuable for career growth:
+
+-   **Shiny**: This package allows you to build **interactive web applications and dashboards** directly from R. It is a powerful career tool because it enables you to share your data insights with non-technical managers and clients in a user-friendly, interactive format.
+
+-   **Caret (or Tidymodels)**: These packages provide a unified interface for **machine learning**. Mastering these tools allows you to perform advanced predictive modeling such as classification and regression, which is a highly sought-after skill in data science roles.
+
+## R vs. Python
+
+::: callout-tip
+If you want a presentable report that is easy to share, using Quarto and R is ideal, but if oyu want to deploy (ie. github, netfly) your workflows, python is your choice
+:::
+
+R’s sweet spot is statistics-first data analysis: it shines in expressive data wrangling, publication-quality visualization especially with ggplot2, and deep, mature statistical modeling libraries. It’s also excellent for reporting and reproducibility through R Markdown and Quarto.
+
+Python’s sweet spot is being a general-purpose language that covers data work plus software-building: it leads in machine learning/deep learning (e.g., scikit-learn, PyTorch) and tends to get cutting-edge ML tooling first.
+
+#### hidden/folding code example
+
+```{r}
+#| label: fig-demo
+#| echo: false
+#| message: false
+#| warning: false
+#| fig-cap: "simple demo plot."
+x <- 1:20
+y <- x^2
+plot (x,y)
+```
+
+I am able to reference the figure above as @fig-demo.

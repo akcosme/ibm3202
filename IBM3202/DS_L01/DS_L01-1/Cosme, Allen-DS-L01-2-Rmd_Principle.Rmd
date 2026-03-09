@@ -1,0 +1,150 @@
+---
+title: "R markdown: reproducible report in data science"
+author: "Allen Cosme"
+date: "`r Sys.time()`"
+output: 
+  html_document:
+    toc: yes
+    toc_depth: 4
+    toc_float: yes
+    highlight: espresso
+    theme: journal
+    number_sections: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R markdown
+
+R markdown is a format for writing reproducible, dynamic reports with R. Use it to embed R code and results into slide shows, PDF files, HTML documents, word files and more
+
+# Structure
+
+1. YAML header
+2. text area
+3. Code chunk
+
+# Workflow
+
+1. Open - open a file that uses the . RMD extension.
+2. Write - Write content with the easy to use R markedown syntax
+3. Embed - Embed R code that creates output to include in the report
+4. Render - Replace R code with its output and transform the report into a slideshow, pdf, html or MS word file
+
+# Text Area Formating tools
+
+plain text
+
+end a line with two spaces to start a new paragraph
+
+*italics* and _italics_. 
+
+**Bold** and __bold__. 
+
+superscript^2^. 
+
+~~Strikethrough~~. 
+
+Hyperlink [CCIDM](https://www.cpp.edu/cba/customer-insights-lab/index.shtml)  
+
+# header 1
+## header 2
+### header 3
+#### header 4
+##### haeder 6
+
+Endash --
+emdash ---
+inline equation $A= \pi*r^2$
+slide break:
+
+***
+> block quote
+
+1. ordered list 1
+2. ordered list 2
+  + sub-item 1
+  + sub-item 2
+  
+Table header  | second header
+ :----------: | :------------:
+ Table cell.  | cell 2
+ cell 3.      | cell 4
+
+# YAML Header
+>
+A YAML header is a set of key value pairs at the start of your file. Begin and end the header with a line of 3 dashes (---). (From the rmd cheatsheet
+<https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf>)
+
+- **date**: '`r format(Sys.time())`'
+  - this allows to print the current time each time you knit the file
+    - can be customized in various ways
+    + date+time: `r Sys.time()`
+    + Day, month, date, year (e.g., Sunday, January 15, 2026): '`r format (Sys.time(), "%A, %B, %C, %D")`'
+    + M/D/Y (e.g., 01/25/2026): '`r format(Sys.time(), "%m/%d/%y")`'
+    
+***
+
+- **toc**: yes
+      - I turned the table of contents on. This will have hyperlinks in HTML and allow renders to navigate desired sections faster
+- **toc_depth**: 4
+      - I want to see 4 levels of headings
+_ **toc_float** : true
+      - adding this move toc from the front end of the document to the left side floating when you scroll down
+      - by default, the floating toc are collapsed, not showing all headings. We can turn it off using the following code
+          ```
+          toc_float:
+            collapsed: false
+          ```
+- **highlight**: espresso
+- **theme**: journal
+- **number_sections**: yes
+    - turned on automatic section numbering
+    
+# Embed Codes
+
+## code chunk
+
+### Sample
+
+* ctrl + alt + I
+
+```{r penguins, message=TRUE, warning=TRUE}
+#use ctrl+enter to run code
+#install.packages("tidyverse")
+library(tidyverse)
+
+#install.packages("palmerpenguins")
+library(palmerpenguins)
+penguins
+
+dim(penguins)
+install.packages("skimr", repos = "https://cloud.r-project.org")
+library(skimr)
+skimr::skim(penguins)
+
+#sex distribution
+penguins %>%
+  count(sex) %>%
+  ggplot(aes(sex, n)) +
+  geom_col() 
+  
+# of male penquins
+  sum(penguins$sex =="male", na.rm = TRUE)
+
+#total observations
+nrow(penguins)
+
+# percentage of males
+m_per <- round((sum(penguins$sex == "male", na.rm = TRUE) / nrow(penguins)) * 100, 1)
+#percentage of females 
+f_per <- round((sum(penguins$sex == "female", na.rm = TRUE) / nrow(penguins)) * 100, 1)
+```
+## inline coding
+
+* sample characteristics: 
+there are `r nrow(penguins)` penguins in the data `r m_per` % of which are males and ` r f_per` are females
+***
+
