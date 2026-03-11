@@ -77,8 +77,10 @@ flights |>
   count(year, month, day) |>
   arrange(desc(n)) |>
   mutate(month = as_factor(month)) |>
+  mutate(month = fct_reorder(month,n)) |>
   ggplot(aes(month, n, fill = year)) +
-  geom_col(show.legend = FALSE) +
+  geom_col(fill = "#FF007F", show.legend = FALSE) +
+  coord_flip() +
   labs(x = "Month", 
       y = "Number of flights",
       title = "Daily flights during 2013"
