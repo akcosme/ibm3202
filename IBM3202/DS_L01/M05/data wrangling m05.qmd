@@ -38,4 +38,42 @@ by the end of this module, you will be able to:
 ```{r}
 library(tidyverse)
 ```
+# what is tidy verse
+The tidyverse is a collection of R packages that share a common design philosophy and are designed to work together seamlessly. The tidyverse includes packages for data manipulation, visualization, and modeling, among other tasks. Some of the core packages in the tidyverse include:
+-  ggplot2: for data visualization
+-  dplyr: for data manipulation
+-  tidyr: for data tidying
+-  readr: for data import
+-  purrr: for functional programming
+-  tibble: for data frames
+-  stringr: for string manipulation
+-  forcats: for working with categorical variables
+
+## initial data prep and exploration
+```{r}
+#install.packages("nycflights13")
+library(nycflights13)
+data()
+```
+
+# data wrangling with dylyr
+
+:::{callout-note}
+For mac, use `shift + option + I` for multi cursor activation
+:::
+
+Data sets in package ‘nycflights13’:
+
+- airlines                Airline names.
+- airports                Airport metadata
+- flights                 Flights data
+- planes                  Plane metadata.
+- weather                 Hourly weather data
+
+```{r}
+flights
+
+flights |>
+  count(year) 
+```
 
