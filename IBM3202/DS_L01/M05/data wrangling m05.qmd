@@ -71,9 +71,17 @@ Data sets in package ‘nycflights13’:
 - weather                 Hourly weather data
 
 ```{r}
-flights
+flights 
 
 flights |>
-  count(year) 
+  count(year, month, day) |>
+  arrange(desc(n)) |>
+  mutate(month = as_factor(month)) |>
+  ggplot(aes(month, n, fill = year)) +
+  geom_col(show.legend = FALSE) +
+  labs(x = "Month", 
+      y = "Number of flights",
+      title = "Daily flights during 2013"
+      )
 ```
 
