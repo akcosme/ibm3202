@@ -1,0 +1,47 @@
+---
+title: "Part 5 — GA4 Certification Exam (Google Analytics 4 Certification)"
+author: "Allen Cosme"
+date: "2026-03-12"
+format: 
+    html:
+        theme: cosmo
+        toc: true
+        toc-depth: 3
+        toc-location: right-body
+---
+
+## Proof of completion
+
+![](Desktop/Final%20GA4%20cert.png)
+
+## Exam reflection 
+
+### Answer all prompts:
+
+####  Results summary: 
+
+I passed the test on the first try with a score of 80%. I was surprised that I passed on the first try, but I was also relieved. I had studied the material and felt prepared, but I know that the exam can be challenging.
+
+## Top 3 topics that were most challenging (bullets).
+
+-   Event creation
+-   SQL integration
+-   data streams from different sources
+
+## Two questions you wish you could redo
+
+-   I wish I could redo the question about event creation, because I struggled with understanding how to set up events correctly in GA4. I think I need to review the documentation and maybe watch some tutorials to get a better grasp on this topic.
+
+## CEP connection: Name one thing you will change in your CEP measurement/analysis plan because of what you learned
+
+-   I will change my CEP measurement plan to include more focus on event tracking. I realized that events are a crucial part of GA4 and can provide valuable insights into user behavior. I will make sure to set up events correctly and track the right actions to get the most out of my analysis.
+
+## GA4 “readiness check”
+
+![](Desktop/KPI 1.png)
+
+![](Desktop/KPI 2.png)
+
+## Include 2–3 sentences explaining why that KPI/report supports your project goal.
+
+-   The KPI I chose is the "User Engagement" report in GA4. This report provides insights into how users are interacting with my website, including metrics such as average engagement time and engagement rate. This information is crucial for my project goal, which is to improve user experience and increase engagement on my website. By analyzing this report, I can identify areas where users may be dropping off or not engaging as much, and I can make informed decisions on how to optimize the user experience to keep them engaged longer.
