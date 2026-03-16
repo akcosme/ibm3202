@@ -1,0 +1,112 @@
+---
+title: "M06-Reflection Essay-Advanced Data Wrangling"
+author: "Allen Cosme"
+date: "`r format(Sys.time())`"
+format: 
+  html: 
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-link: true
+    embed-resources: true
+editor: visual
+execute: 
+  freeze: auto
+---
+
+## Summarize what you learned in Step 1 about Tidyverse tricks presented by David Robinson in the video Ten Tremendous Tricks in the Tidyverse. What are the tricks? How do they enhance your data analysis efficiency?
+
+In the video Ten Tremendous Tricks in the Tidyverse, David Robinson demonstrates how to enhance data analysis efficiency using specialized R functions that go beyond basic syntax. He begins by showcasing the versatility of `count()`, which can sort, weight, and rename columns in a single step, and explains how creating new variables directly within a group_by or count call, such as aggregating years into decades, saves valuable lines of code. The presentation also highlights `add_count()` as a powerful tool for appending group frequencies without collapsing the data set, making it easier to filter groups by size while keeping the original data intact. Furthermore, Robinson explains how `summarize()` can be used to create list columns to store complex objects like t-tests or linear models, enabling a "tidy" approach to handling multiple statistical outputs simultaneously within a single data frame.
+
+The second half of the talk focuses on professional visualization and data cleaning techniques that simplify the interpretation of complex data sets. Robinson advocates for the "sorted bar plot" as a primary analytical tool, achieved by combining `fct_reorder()` with `geom_col()` to make rankings instantly readable for the viewer. He introduces `fct_lump()` to clean up messy categorical data by collapsing rare levels into an "Other" category and emphasizes that applying log scales via `scale_x_log10()` is often essential, as real-world data like prices or populations are frequently log-normally distributed. Finally, he covers advanced data reshaping using `crossing()` to generate all possible combinations of inputs for simulations, alongside `separate()` and `extract()` for splitting complex strings into tidy columns, arguing that these cumulative "tricks" are what allow a data scientist to maintain a seamless analytical flow.
+
+## What do you think about David Robinson's impromptu screencast performance in Step 2? How much were you able to understand?
+
+David Robinson's impromptu screen cast performance in Step 2 was impressive and engaging. He demonstrated a deep understanding of the Tidyverse and was able to explain complex concepts in a clear and concise manner. I was able to understand most of the content, especially since I had some prior experience with the Tidyverse from M05. However, there were a few advanced techniques that he covered that I found a bit challenging to grasp fully on the first watch. Overall, his performance was inspiring and motivated me to explore the Tidyverse further to enhance my data wrangling skills.
+
+## In Step 3, you saw two videos, one showing initial data cleaning and the other showing further cleaning. Describe the two processes. What are the big differences between the two? How do the differences result in the differences in final sample size?
+
+In the first video, the initial data cleaning process involved basic steps such as removing duplicates, handling missing values, and filtering out irrelevant data. This process is crucial for ensuring that the dataset is accurate and ready for analysis. The focus was on getting rid of obvious issues that could skew the results.
+
+## In Step 4, you learned how to create an Revealjs presentation. What's your impression of the Revealjs presentation? Describe its capabilities as you learned from the video. What are its strengths and weaknesses compared with PPT?
+
+Revealjs is a powerful tool for creating interactive and visually appealing presentations. It allows for a high degree of customization, including the ability to embed code, create dynamic content, and use various themes and transitions. One of its strengths is that it can be easily shared online, making it accessible to a wider audience. Additionally, it supports markdown, which can simplify the process of creating slides.
+
+## Provide a link to the revealjs presentation you published.
+
+::: callout-tip
+## link to my revealjs presntation
+
+[website proposal](https://rpubs.com/akcosme/1410525)
+:::
+
+## Briefly describe what the presentation is about. What did you learn about the Revealjs presentation from the experience?
+
+The presentation I created is a proposal for a professional portfolio website. It outlines the goals of the website, which include building a personal brand, showcasing academic and project-based experience, and highlighting analytical, strategic, and communication skills. The presentation also explains why having a portfolio website is important for internships, job applications, and networking.
+
+## Pick three relational databases, describe when to use them, and give one coding example along with an output for each function.
+
+**1.  Mutating Joins (specifically left_join())**
+
+-   Use this when you have two separate tables that share a "key" (like a Customer ID or Product SKU) and you want to bring information from a "supplementary" table into your "primary" table. Unlike a simple copy-paste, a join ensures that the right data aligns with the right row, even if the rows are in a different order.
+
+```{r}
+library(dplyr)
+# Sample data frames
+primary <- data.frame(CustomerID = c(1, 2, 3), Name =
+                         c("Alice", "Bob", "Charlie"))
+supplementary <- data.frame(CustomerID = c(1, 2), Age = c
+                         (25, 30))
+# Using left_join to bring Age into the primary table
+result <- left_join(primary, supplementary, by = "CustomerID")
+print(result)
+```
+
+**2.  Conditional Logic with case_when()**
+
+-   Use case_when() when you want to create a new variable based on multiple conditions. It allows you to specify different outcomes for different conditions in a clear and readable way, which is especially useful when you have more than two conditions.
+
+```{r}
+library(dplyr)
+# Sample data frame
+data <- data.frame(Score = c(85, 92, 78, 60
+))
+# Using case_when to create a new variable based on Score
+data <- data %>%
+  mutate(Grade = case_when(
+    Score >= 90 ~ "A",
+    Score >= 80 ~ "B",
+    Score >= 70 ~ "C",
+    TRUE ~ "F"
+  ))
+print(data)
+```
+
+**3.  Column-wise Operations with across()**
+
+-   Use across() when you want to apply the same transformation or summary function to multiple columns at once. This is particularly helpful for cleaning or summarizing data without having to write repetitive code for each column.
+
+```{r}
+library(dplyr)
+# Data with multiple numeric metrics
+store_metrics <- tibble(
+  store_id = c("A", "B"),
+  revenue = c(1000, 2000),
+  visitors = c(50, 150),
+  satisfaction_score = c(4.2, 4.8)
+)
+
+# Calculating the mean for all numeric columns across the whole dataset
+summary_table <- store_metrics %>%
+  summarize(across(where(is.numeric), mean))
+
+print(summary_table)
+```
+
+## What did you like the most about working with the tools you learned in this module? Elaborate on your point.
+
+Data wrangling is indeed a crucial step in the data analysis process, and I appreciate the power and flexibility that dplyr and tidyr offer for manipulating and tidying data. What I liked the most about working with these tools is how they allow for a more intuitive and efficient way to handle data transformations. For example, the use of pipes `(%\>%)` in dplyr makes it easy to chain together multiple operations in a clear and readable manner. This not only improves the readability of the code but also helps to maintain a logical flow of data manipulation steps. Additionally, tidyr's functions like `pivot_longer()` and `pivot_wider()` make it straightforward to reshape data, which is often necessary for analysis and visualization. Overall, these tools have significantly enhanced my ability to clean and prepare data for analysis, making the process more enjoyable and less tedious.
+
+## What seems to be the challenge, if any, for you when you try to master the wrangling tools?
+
+One of the challenges I face when trying to master the wrangling tools is understanding the nuances of when to use specific functions and how they interact with each other. For instance, while I can use functions like `left_join()` or `case_when()`, I sometimes struggle with choosing the most efficient approach for a given problem, especially when dealing with larger datasets or more complex transformations. Additionally, there are often multiple ways to achieve the same result in R, and it can be overwhelming to determine which method is best in terms of performance and readability. As I continue to practice and explore these tools, I hope to gain a deeper understanding of their capabilities and limitations, which will help me become more proficient in data wrangling.
