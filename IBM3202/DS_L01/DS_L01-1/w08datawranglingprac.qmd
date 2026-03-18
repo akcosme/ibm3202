@@ -1,0 +1,103 @@
+---
+title: "Data Wrangling with R"
+author: "Allen Cosme"
+date: today
+format: 
+    html:
+        theme: cosmo
+        toc: true
+        toc-depth: 3
+        toc-location: right-body
+        embed-resources: true
+        number-sections: true
+execute: 
+  freeze: true
+---
+
+::: callout-note
+**note**: this codebook will follow the structure and content of the published codebook of 
+[M05-1-Data wrangling with Tidyvverse in R](https://jmjung.quarto.pub/m05-1-principles-data-wrangling-with-tidyverse-in-r/) by Jae Jung, Ph.D.
+:::
+
+# Overview
+
+## Learning outcome
+
+> By the end of this module, you should be able to:
+
+-   Describe the concept of Data Wrangling.
+-   Describe how Tibbles are different from data frames
+-   Explain how to convert wide or long data to “Tidy” data
+-   Explain how to merge relational data sets using join functions.
+-   Explain how to use grouped mutates and filter together.
+-   Be familiar with major dplyr functions for transforming data.
+-   Create a new variable with `mutate()` and `case_when()`.
+-   Use the pipe operator to shape the data to prepare for analysis and visualization
+
+## Textbook chapters covered
+
+- Ch3: Data Transformation
+- Ch5: Data Tidying
+- Ch13: Numbers
+
+# Introduction to data wrangling
+
+## loading packages
+```{r}
+library(tidyverse)
+```
+
+# what is Tidyverse
+
+The tidyverse is a collection of R packages that share a common design philosophy and are designed to work together seamlessly. The tidyverse includes packages for data manipulation, visualization, and modeling, among other tasks. 
+
+> Some of the core packages in the tidyverse include:
+
+-  ggplot2: for data visualization
+-  dplyr: for data manipulation
+-  tidyr: for data tidying
+-  readr: for data import
+-  purrr: for functional programming
+-  tibble: for data frames
+-  stringr: for string manipulation
+-  forcats: for working with categorical variables
+
+## intitial data prep and exploration
+
+```{r}
+#install.packages("nycflights13")
+library(nycflights13)
+data()
+```
+
+# data wrangling with dplyr
+
+:::{.callout-note}
+For MacOS, use `shift + option + I` for multi cursor activation
+:::
+
+Data sets in package ‘nycflights13’:
+
+- airlines                Airline names.
+- airports                Airport metadata
+- flights                 Flights data
+- planes                  Plane metadata.
+- weather                 Hourly weather data
+
+```{r}
+flights <- flights
+
+flights |>
+  count(year, month) |>
+  arrange(desc(n)) |>
+  mutate(month = as_factor(month)) |>
+  mutate(month = fct_reorder(month,n)) |>
+  ggplot(aes(month, n, fill = year)) +
+  geom_col(fill = "#FF007F", show.legend = FALSE) +
+  coord_flip() +
+  labs(x = "Month", 
+      y = "Number of flights",
+      title = " Number of Daily flights by month during 2013 at New york"
+      )
+```
+

@@ -104,13 +104,9 @@ monthly_avg_top10 %>%
 ```
 
 ::: {.callout-note title="Key Insight" icon="true"}
-This chart reflects **extreme delay behavior** rather than typical delays: it averages only the
-**10 worst arrival delays per day**. Months with higher bars indicate that the *worst daily delays*
-tend to be especially severe in that part of the year.
+This chart reflects **extreme delay behavior** rather than typical delays: it averages only the **10 worst arrival delays per day**. Months with higher bars indicate that the *worst daily delays* tend to be especially severe in that part of the year.
 
-In practice, this pattern often aligns with **seasonal disruption drivers** (e.g., summer storms,
-winter weather, and peak travel demand), which can amplify delay severity even if the *average flight*
-is not dramatically worse.
+In practice, this pattern often aligns with **seasonal disruption drivers** (e.g., summer storms, winter weather, and peak travel demand), which can amplify delay severity even if the *average flight* is not dramatically worse.
 :::
 
 # Religion vs. income
@@ -141,23 +137,20 @@ help("relig_income") # or ?relig_income
 
 ## Does the current data support “income bracket frequency by religion”? Is it tidy? How reshape?
 
-:::{.panel-tabset}
-
+::: panel-tabset
 ## Does it support the goal?
 
 Yes, it contains the information, but it’s not in tidy (long) form for easy plotting.
 
 ## Why not tidy right now?
 
-- Income brackets are stored as column names, not as values in a single income variable.
-- That violates tidy-data rules: one variable per column.
-- Here, “income bracket” is a variable spread across many columns.
+-   Income brackets are stored as column names, not as values in a single income variable.
+-   That violates tidy-data rules: one variable per column.
+-   Here, “income bracket” is a variable spread across many columns.
 
 ## How should it be reshaped?
-Use pivot_longer() so you end up with:
-- religion (category)
-- income (income bracket)
-- count (frequency)
+
+Use pivot_longer() so you end up with: - religion (category) - income (income bracket) - count (frequency)
 
 That format makes grouped plots (like bar charts) straightforward.
 :::
@@ -223,7 +216,7 @@ relig_income %>%
 
 # Rents relationship to income in the US
 
-##  Explore us_rent_income
+## Explore us_rent_income
 
 ```{r}
 library(tidyverse)
@@ -241,11 +234,11 @@ summary(us_rent_income)
 
 What does the data set tell us?
 
-- it's a tibble
-- there are 5 total variables GEOID, Name, variable, Estimate, moe.
-- each state is combined with a variable like income or rent
-- Estimate is estimated value and moe is margin of error
-- missing values may be present
+-   it's a tibble
+-   there are 5 total variables GEOID, Name, variable, Estimate, moe.
+-   each state is combined with a variable like income or rent
+-   Estimate is estimated value and moe is margin of error
+-   missing values may be present
 
 ## help/variable meanings
 
@@ -253,25 +246,22 @@ What does the data set tell us?
 help("us_rent_income")
 ```
 
-- **GEOID** = state id (CA,WA,NV, etc)
-- **name** = State name
-- **variable** = which metric each row is describing (in this case, income vs. rent)
-- **estimate** = estimated value of metrics for state
-- **moe** = "margin of error" of estimate or uncertainty
+-   **GEOID** = state id (CA,WA,NV, etc)
+-   **name** = State name
+-   **variable** = which metric each row is describing (in this case, income vs. rent)
+-   **estimate** = estimated value of metrics for state
+-   **moe** = "margin of error" of estimate or uncertainty
 
-##
+## 
 
 **goal**: plot a relationship between income and rent across different states
 
-**does the current table directly support our goal** 
+**does the current table directly support our goal**
 
 No, since income and rent are in different rows. For a scatter plot, you want a one row per state that has both rent and income
 
-**how can we reshape**
-- use the pivot_wider function in order to make the column names:
-  - estimate_income, estimate_rent
-  - moe_income, moe_rent
-  
+**how can we reshape** - use the pivot_wider function in order to make the column names: - estimate_income, estimate_rent - moe_income, moe_rent
+
 doing this makes it easier to plot and analyze income against rent
 
 ## Reshape to wide + plot income vs rent
@@ -304,7 +294,7 @@ us_rent_income_wider %>%
   )
 ```
 
-##  data reshape to wide + plot income v. rent
+## data reshape to wide + plot income v. rent
 
 ```{r}
 library(tidyverse)
@@ -356,7 +346,7 @@ nba_sep <- nba %>%
 nba_sep
 ```
 
-## Unite back into one column → mba_uni 
+## Unite back into one column → mba_uni
 
 ```{r}
 nba_uni <- nba_sep %>%
@@ -371,7 +361,7 @@ nba_uni
 
 # flight departures
 
-## non-cancelled flights -> first/last depature each day
+## non-cancelled flights -\> first/last depature each day
 
 ```{r}
 library(tidyverse)
@@ -415,11 +405,11 @@ latest_first_by_month %>%
   fmt_number(columns = n, decimals = 0)
 ```
 
-:::{.callout-note}
+::: callout-note
 dep_time is in HHMM “clock” format (e.g., 5 = 00:05, 2359 = 23:59). That’s why the table labels it HHMM.
 :::
 
-## flights in GT 
+## flights in GT
 
 ```{r}
 library(tidyverse)
@@ -447,7 +437,7 @@ top5_dest_by_carrier %>%
   fmt_number(columns = n, decimals = 0)
 ```
 
-# Solar.R 
+# Solar.R
 
 ## how much is missing in Solar.R and at what percentage?
 
@@ -479,6 +469,7 @@ air.tib <- air.tib %>%
 ```
 
 ## conformation of no missing Solar.R
+
 ```{r}
 air.tib %>%
   summarise(n_missing_solar_after = sum(is.na(Solar.R)))
@@ -574,8 +565,10 @@ air.tib %>%
 
 What can we gather from the data?
 
-- there is a positive relationship between Ozone and Temprature
-- opposite is true when we change temprature to wind
+-   there is a positive relationship between Ozone and Temprature
 
-- Ozone vs wind temprature looks stronger since it is combining both affects 
-  - wind temprature increases when Temp is high and/or Wind is low, which are both conditions associated with higher ozone. So temp_wind acts like a simple “high-heat + low-wind” index, which tends to align more tightly with Ozone than either variable alone.
+-   opposite is true when we change temprature to wind
+
+-   Ozone vs wind temprature looks stronger since it is combining both affects
+
+    -   wind temprature increases when Temp is high and/or Wind is low, which are both conditions associated with higher ozone. So temp_wind acts like a simple “high-heat + low-wind” index, which tends to align more tightly with Ozone than either variable alone.
