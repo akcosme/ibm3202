@@ -14,7 +14,7 @@ execute:
   freeze: auto
 ---
 
-> **note** this code book will follow the structure and content for the project: https://jmjung.quarto.pub/m05-1-principles-data-wrangling-with-tidyverse-in-r/
+> **note** this code book will follow the structure and content for the project: [M05-1-Data wrangling with Tidyvverse in R](https://jmjung.quarto.pub/m05-1-principles-data-wrangling-with-tidyverse-in-r/)
 
 # Overview
 
