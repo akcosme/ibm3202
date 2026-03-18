@@ -1,7 +1,7 @@
 ---
-title: "W07-Introduction to Positron Reflection Assignment"
+title: "W07-Introduction to Positron"
 author: "Allen Cosme"
-date: '`r format(Sys.time())`'
+date: "`r format(Sys.time())`"
 format: 
   html: 
     toc: true
@@ -18,7 +18,7 @@ execute:
 
 -   what do you like about Positron compared with RStudio?
 
-Using positron over the past few days taught me a lot about the software. One thing that I really like about positron is the fact that you can change key binds for shortcuts. Positron is very user friendly in some cases, but coming from Rstudio, many of the functions don't make sense. For example, the shortcut for running code in positron is "ctrl + enter" while in Rstudio it is "cmd + enter". This can be very frustrating when you are used to using Rstudio and you have to relearn how to use positron. However, the fact that you can change key binds for shortcuts makes it easier for me to use positron without having to relearn how to use it.
+Using positron over the past few days taught me a lot about the software. One thing that I really like about positron is the fact that you can change key binds for shortcuts. Positron is very user friendly in some cases, but coming from Rstudio, many of the functions don't make sense. For example, the shortcut for running code in positron is "ctrl + enter" while in Rstudio it is "cmd + enter". This can be very frustrating when you are used to using Rstudio and you have to relearn how to use positron. However, the fact that you can change key binds for shortcuts makes it easier for me to use positron without having to relearn how to use it.Using positron over the past few days taught me a lot about the software. One thing that I really like about positron is the fact that you can change key binds for shortcuts. Positron is very user friendly in some cases, but coming from Rstudio, many of the functions don't make sense. For example, the shortcut for running code in positron is "ctrl + enter" while in Rstudio it is "cmd + enter". This can be very frustrating when you are used to using Rstudio and you have to relearn how to use positron. However, the fact that you can change key binds for shortcuts makes it easier for me to use positron without having to relearn how to use it.
 
 -   Which AI tools have you installed or set up? Which AI tools did you find beneficial for you?
 
@@ -26,6 +26,6 @@ The AI tool that I use the most is ChatGPT since it can analyze and explain why 
 
 -   Apply for it and take a screenshot showing you were accepted into the education program. play with it and do you find it helpful or distracting? Please elaborate
 
-![fig1: Screenshot showing email confirmation showing approval of github edu](Desktop/github%20edu%20verified%20.png)
+![fig1: Screenshot showing email confirmation showing approval of github edu](images/github%20edu%20verified%20.png)
 
 After applying for the GitHub Education program, I received an email confirming that I was accepted into the program. I find it helpful because it gives me access to a lot of resources that I can use for my projects. For example, I can use GitHub Copilot, which is an AI tool that helps me write code by suggesting code snippets based on the context of what I'm writing. I also have access to GitHub's private repositories, which allows me to work on projects without having to worry about them being public. Overall, I find the GitHub Education program to be very beneficial for my learning and development as a programmer.
