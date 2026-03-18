@@ -1,0 +1,581 @@
+---
+title: "M05-1: Principles - Expanded In-depth Data Wrangling with Tidyverse in R"
+author: "Allen Cosme"
+date: "`r format(Sys.time())`"
+format: 
+  html: 
+    toc: true
+    toc-depth: 4
+    number-sections: true
+    code-line-numbers: true
+    code-fold: false
+    code-link: true
+    embed-resources: true
+    df-print: paged
+editor: visual
+execute: 
+  freeze: auto
+  warning: false  
+  error: true
+---
+
+# Air quality
+
+## Convert airquality to a tibble (air.tib), then to a data.frame (air.df)
+
+```{r}
+library(tidyverse)
+
+# air qual. -> tibble
+air.tib <- as_tibble(airquality)
+
+class(air.tib)
+is_tibble(air.tib) 
+
+# tibble -> base data. frame
+air.df <- as.data.frame(air.tib)
+
+#confirm data.frame
+class(air.df)
+is.data.frame(air.df) # true
+is_tibble(air.tib) #false
+```
+
+## Find Ozone when Temp == 97 (row + Ozone-only), using Base R and Tidyverse
+
+```{r}
+air.tib[air.tib$Temp == 97, ]
+```
+
+```{r}
+air.tib %>% filter(Temp ==97)
+```
+
+```{r}
+air.tib$Ozone[air.tib$Temp ==97]
+```
+
+```{r}
+air.tib %>% filter(Temp == 97) %>% pull(Ozone)
+```
+
+# FLight delay
+
+## Top 10 worst arrival delays per day → average (of those) by month
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+
+# Top 10 worst arrival delays per (year, month, day),
+# then average those delays by month (ignoring year/day)
+monthly_avg_top10 <- flights %>%
+  filter(!is.na(arr_delay)) %>%                 # remove NAs so "worst" is meaningful
+  group_by(year, month, day) %>%
+  slice_max(order_by = arr_delay, n = 10, with_ties = FALSE) %>%
+  ungroup() %>%                                 # remove day-level grouping
+  group_by(month) %>%
+  summarise(
+    avg_delay_top10 = mean(arr_delay),
+    .groups = "drop"
+  )
+```
+
+## Visualization of average delays each month
+
+```{r}
+library(ggplot2)
+
+monthly_avg_top10 %>%
+  ggplot(aes(x = factor(month), y = avg_delay_top10)) +
+  geom_col() +
+  labs(
+    title = "Average Arrival Delay by Month (Top 10 Worst Delays Per Day)",
+    subtitle = "For each day, kept only the 10 largest arrival delays; then averaged by month",
+    x = "Month",
+    y = "Average arrival delay (minutes)",
+    caption = "Data: nycflights13::flights"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold")
+  )
+```
+
+::: {.callout-note title="Key Insight" icon="true"}
+This chart reflects **extreme delay behavior** rather than typical delays: it averages only the
+**10 worst arrival delays per day**. Months with higher bars indicate that the *worst daily delays*
+tend to be especially severe in that part of the year.
+
+In practice, this pattern often aligns with **seasonal disruption drivers** (e.g., summer storms,
+winter weather, and peak travel demand), which can amplify delay severity even if the *average flight*
+is not dramatically worse.
+:::
+
+# Religion vs. income
+
+## Explore relig_income (type, size, missing values, variables) + what we can tell
+
+```{r}
+library(tidyverse)
+
+relig_income
+class(relig_income)
+dim(relig_income)
+glimpse(relig_income)
+names(relig_income)
+
+# missing valise check (counts N/a per column)
+colSums(is.na(relig_income))
+
+# summary for each column
+summary(relig_income)
+```
+
+## help for relig_income
+
+```{r}
+help("relig_income") # or ?relig_income
+```
+
+## Does the current data support “income bracket frequency by religion”? Is it tidy? How reshape?
+
+:::{.panel-tabset}
+
+## Does it support the goal?
+
+Yes, it contains the information, but it’s not in tidy (long) form for easy plotting.
+
+## Why not tidy right now?
+
+- Income brackets are stored as column names, not as values in a single income variable.
+- That violates tidy-data rules: one variable per column.
+- Here, “income bracket” is a variable spread across many columns.
+
+## How should it be reshaped?
+Use pivot_longer() so you end up with:
+- religion (category)
+- income (income bracket)
+- count (frequency)
+
+That format makes grouped plots (like bar charts) straightforward.
+:::
+
+## reshape data and plotting income distribution be religion
+
+```{r}
+library(tidyverse)
+
+relig_income_longer <- relig_income %>%
+  pivot_longer(
+    cols = -religion,
+    names_to = "income",
+    values_to = "count"
+  ) %>%
+  filter(income != "Don't know/refused")  
+```
+
+## redo of 3.4 as one long chain
+
+```{r}
+relig_income_longer %>%
+  ggplot(aes(x = income, y = count, fill = religion)) +
+  geom_col(position = "dodge") +
+  labs(
+    title = "Income Distribution by Religion",
+    x = "Income bracket",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+# Income distribution by religion
+
+```{r}
+library(tidyverse)
+
+relig_income %>%
+  pivot_longer(
+    cols = -religion,
+    names_to = "income",
+    values_to = "count"
+  ) %>%
+  filter(income != "Don't know/refused") %>%
+  ggplot(aes(x = income, y = count)) +
+  geom_col() +
+  facet_wrap(~ religion) +
+  labs(
+    title = "Income Distribution by Religion (Tidied with pivot_longer)",
+    x = "Income bracket",
+    y = "Count"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.text.x = element_text(angle = 45, hjust = 1)
+  )
+```
+
+# Rents relationship to income in the US
+
+##  Explore us_rent_income
+
+```{r}
+library(tidyverse)
+
+us_rent_income
+class(us_rent_income)
+dim(us_rent_income)
+glimpse(us_rent_income)
+names(us_rent_income)
+
+colSums(is.na(us_rent_income))
+
+summary(us_rent_income)
+```
+
+What does the data set tell us?
+
+- it's a tibble
+- there are 5 total variables GEOID, Name, variable, Estimate, moe.
+- each state is combined with a variable like income or rent
+- Estimate is estimated value and moe is margin of error
+- missing values may be present
+
+## help/variable meanings
+
+```{r}
+help("us_rent_income")
+```
+
+- **GEOID** = state id (CA,WA,NV, etc)
+- **name** = State name
+- **variable** = which metric each row is describing (in this case, income vs. rent)
+- **estimate** = estimated value of metrics for state
+- **moe** = "margin of error" of estimate or uncertainty
+
+##
+
+**goal**: plot a relationship between income and rent across different states
+
+**does the current table directly support our goal** 
+
+No, since income and rent are in different rows. For a scatter plot, you want a one row per state that has both rent and income
+
+**how can we reshape**
+- use the pivot_wider function in order to make the column names:
+  - estimate_income, estimate_rent
+  - moe_income, moe_rent
+  
+doing this makes it easier to plot and analyze income against rent
+
+## Reshape to wide + plot income vs rent
+
+```{r}
+library(tidyverse)
+
+us_rent_income_wider <- us_rent_income %>%
+  pivot_wider(
+    names_from  = variable,
+    values_from = c(estimate, moe),
+    names_sep   = "_"
+  )
+```
+
+```{r}
+us_rent_income_wider %>%
+  ggplot(aes(x = estimate_income, y = estimate_rent)) +
+  geom_point() +
+  labs(
+    title = "Income vs. Rent Across States",
+    subtitle = "Each point is a state (estimate values)",
+    x = "Estimated income",
+    y = "Estimated rent"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold")
+  )
+```
+
+##  data reshape to wide + plot income v. rent
+
+```{r}
+library(tidyverse)
+
+us_rent_income %>%
+  pivot_wider(
+    names_from  = variable,
+    values_from = c(estimate, moe),
+    names_sep   = "_"
+  ) %>%
+  ggplot(aes(x = estimate_income, y = estimate_rent)) +
+  geom_point() +
+  labs(
+    title = "Income vs. Rent Across States",
+    subtitle = "Pivoted wider so income and rent are columns",
+    x = "Estimated income",
+    y = "Estimated rent"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold")
+  )
+```
+
+# one long tidyverse chain
+
+```{r}
+library(tidyverse)
+
+nba  <- data.frame(
+  player = c('A','A','B','B','C','C'),
+  year   = c(1,2,1,2,1,2),
+  stats  = c('22/2/3','29/3/4','18/6/7','11/1/2','12/1/1','19/2/4')
+)
+```
+
+## Separate stats into points, assists, steals → nba_sep
+
+```{r}
+nba_sep <- nba %>% 
+  separate(
+    col =  stats,
+    into = c("points", "assists", "steals"),
+    sep = "/",
+    convert = TRUE
+  )
+
+nba_sep
+```
+
+## Unite back into one column → mba_uni 
+
+```{r}
+nba_uni <- nba_sep %>%
+  unite(
+    col = stats,
+    points, assists, steals,
+    sep = "/"
+  )
+
+nba_uni
+```
+
+# flight departures
+
+## non-cancelled flights -> first/last depature each day
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+library(gt)
+
+# 1) first/last depature for non cancelled flights
+daily_dep <- flights %>%
+  filter(!is.na(dep_time)) %>%
+  group_by(year, month, day) %>%
+  summarise(
+    first_dep = min(dep_time),
+    last_dep = max(dep_time),
+    n = n(),
+    .groups = "drop"
+  )
+
+# 2) for each month, keep the day with the latest "first departure"\
+
+latest_first_by_month <- daily_dep %>%
+  group_by(year, month) %>%
+  slice_max(first_dep, n = 1, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(desc(first_dep))
+
+# 3) GT table
+latest_first_by_month %>%
+  gt() %>%
+  tab_header(
+    title = "Latest First Departure Day (per Month)",
+    subtitle = "Non-cancelled NYC flights; first_dep/last_dep are dep_time (HHMM)"
+  ) %>%
+  cols_label(
+    year = "Year",
+    month = "Month",
+    day = "Day",
+    first_dep = "First dep (HHMM)",
+    last_dep = "Last dep (HHMM)",
+    n = "Flights (n)"
+  ) %>%
+  fmt_number(columns = n, decimals = 0)
+```
+
+:::{.callout-note}
+dep_time is in HHMM “clock” format (e.g., 5 = 00:05, 2359 = 23:59). That’s why the table labels it HHMM.
+:::
+
+## flights in GT 
+
+```{r}
+library(tidyverse)
+library(nycflights13)
+library(gt)
+
+top5_dest_by_carrier <- flights %>%
+  filter(!is.na(dep_time)) %>%        
+  count(carrier, dest, sort = TRUE) %>%
+  group_by(carrier) %>%
+  slice_max(n, n = 5, with_ties = FALSE) %>%
+  ungroup() %>%
+  arrange(carrier, desc(n))
+
+top5_dest_by_carrier %>%
+  gt(groupname_col = "carrier") %>%
+  tab_header(
+    title = "Top 5 Destinations by Carrier",
+    subtitle = "Ranked by number of flights (NYC departures)"
+  ) %>%
+  cols_label(
+    dest = "Destination",
+    n = "Flights"
+  ) %>%
+  fmt_number(columns = n, decimals = 0)
+```
+
+# Solar.R 
+
+## how much is missing in Solar.R and at what percentage?
+
+```{r}
+library(tidyverse)
+air.tib %>%
+  summarise(
+    n_rows = n(),
+    n_missing_solar = sum(is.na(Solar.R)),
+    pct_missing_solar = 100 * mean(is.na(Solar.R))
+  )
+```
+
+## find Solar.R mean, and replace missing Solar.R with it
+
+```{r}
+Solar_Mean <- air.tib %>%
+  summarise(solar_mean = mean(Solar.R, na.rm = TRUE)) %>%
+  pull(solar_mean)
+
+Solar_Mean
+```
+
+```{r}
+air.tib <- air.tib %>%
+  mutate(
+    Solar.R = if_else(is.na(Solar.R), Solar_Mean, Solar.R)
+  )
+```
+
+## conformation of no missing Solar.R
+```{r}
+air.tib %>%
+  summarise(n_missing_solar_after = sum(is.na(Solar.R)))
+```
+
+# monthly temprature
+
+## option 1
+
+```{r}
+library(tidyverse)
+
+air.tib %>%
+  group_by(Month) %>%
+  summarise(n = sum(Temp, na.rm = TRUE), .groups = "drop") %>%   # total monthly Temp
+  mutate(
+    Month = recode(as.character(Month),
+                   `5` = "May", `6` = "June", `7` = "July",
+                   `8` = "August", `9` = "September"),
+    Month = factor(Month),
+    Month = fct_reorder(Month, n, .desc = TRUE)                  # reorder by total temp desc
+  ) %>%
+  ggplot(aes(x = n, y = Month)) +
+  geom_col() +
+  labs(
+    title = "Total Monthly Temperature (Sum of Daily Temps)",
+    x = "Total temperature (sum of Temp)",
+    y = "Month"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold")
+  )
+```
+
+## Option 2
+
+```{r}
+library(tidyverse)
+
+air.tib %>%
+  count(Month, wt = Temp, name = "n") %>%                        # weighted count = sum(Temp)
+  mutate(
+    Month = recode(as.character(Month),
+                   `5` = "May", `6` = "June", `7` = "July",
+                   `8` = "August", `9` = "September"),
+    Month = factor(Month),
+    Month = fct_reorder(Month, n, .desc = TRUE)
+  ) %>%
+  ggplot(aes(x = n, y = Month)) +
+  geom_col() +
+  labs(
+    title = "Total Monthly Temperature (Weighted Count by Temp)",
+    x = "Total temperature (sum of Temp)",
+    y = "Month"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    axis.title = element_text(face = "bold")
+  )
+```
+
+# Ozone vs temprature
+
+```{r}
+library(tidyverse)
+
+air.tib %>%
+  mutate(temp_wind = Temp / Wind) %>%
+  select(Ozone, Temp, Wind, temp_wind) %>%
+  pivot_longer(
+    cols = c(Temp, Wind, temp_wind),
+    names_to = "predictor",
+    values_to = "x"
+  ) %>%
+  ggplot(aes(x = x, y = Ozone)) +
+  geom_point(alpha = 0.7, na.rm = TRUE) +
+  geom_smooth(method = "lm", se = FALSE, na.rm = TRUE) +
+  facet_wrap(~ predictor, scales = "free_x") +
+  labs(
+    title = "Ozone vs Temperature, Wind, and Temp/Wind",
+    x = NULL,
+    y = "Ozone"
+  ) +
+  theme_minimal(base_size = 12) +
+  theme(
+    plot.title = element_text(face = "bold"),
+    strip.text = element_text(face = "bold")
+  )
+```
+
+What can we gather from the data?
+
+- there is a positive relationship between Ozone and Temprature
+- opposite is true when we change temprature to wind
+
+- Ozone vs wind temprature looks stronger since it is combining both affects 
+  - wind temprature increases when Temp is high and/or Wind is low, which are both conditions associated with higher ozone. So temp_wind acts like a simple “high-heat + low-wind” index, which tends to align more tightly with Ozone than either variable alone.
