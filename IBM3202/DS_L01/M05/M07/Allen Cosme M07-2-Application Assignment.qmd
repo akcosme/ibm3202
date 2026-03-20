@@ -90,7 +90,7 @@ names(stock_prices) <- stock_company
 stock_prices
 ```
 
-# Creating and cleaning a data frame in base R (0.5 pts)
+# Creating and cleaning a data frame in base R 
 
 ## Create a data frame called "stock_info.df" which is composed of the four vectors created in exercises #2 and #3 above. Verify the number of rows and columns, and also display the summary.  
 
@@ -353,7 +353,7 @@ continent_pop_desc <- continent_pop %>%
 continent_pop_desc
 ```
 
-The first table keeps the original factor order of continent, while the second table sorts the rows by total population in descending order. This means the rows are displayed differently, but the factor levels themselves have not changed yet. To change the factor levels by descending population size, I can use fct_reorder() from the forcats package and reorder continent using the total population values.
+The first table keeps the original factor order of continent, while the second table sorts the rows by total population in descending order. This means the rows are displayed differently, but the factor levels themselves have not changed yet. To change the factor levels by descending population size, I can use 'fct_reorder()' from the forcats package and reorder continent using the total population values.
 
 ```{r}
 # Create a reordered factor for continent based on total population in the most recent year
@@ -405,28 +405,256 @@ gapminder %>%
 
 # Q9.  Shortening Factor Levels: top or bottom 5 lists
 
-## Q9.1: let's first filter the unaltered gapminder dataset by the year 2007 and Asia continent and see how many countries there are in the filtered data. Do this using the piping operator all the time.
+## (1) Using the original gapminder data (not gapminder1), draw a chart that shows the total population by each Asian country in the year 2007, ordered by the size of the population in the chart. As usual, do this in one chain of codes and provide the necessary information and beautification to the chart to portray accurate communication to the viewers.
 
-## Q9.2: How many Asian countries do you see? Given
+```{r}
+library(gapminder)
+library(tidyverse)
+library(patchwork)
 
-## Q9.3: Given the number of countries, it seems like a good idea to present the top 5 and bottom 5 countries, one at a time, and order the countries by life expectancy. Let's first focus on the top 5 list. Do appropriate wrangling and visualization for the top 5 list.  
+# Filter gapminder for Asia in 2007 and count the number of countries
+gapminder %>%
+  filter(year == 2007, continent == "Asia") %>%
+  summarise(number_of_countries = n())
+```
 
-## Q9.4: Do similar wrangling and visualization to show the bottom 5 countries. (5) This time, let's put the two charts together and show them in one pallet by using the patchwork package <https://patchwork.data-imaginist.com/Links to an external site.>.  The end result should look like this.
+## How many Asian countries do you see? Given
 
-Top 5 and Bottom five Asian countries for life expectancy
+There are 33 Asian countries in the filtered gapminder data for the year 2007.
 
-# Q10:   Date-time data type (2 pts)
+```{r}
+# Print the filtered data to confirm the countries included
+gapminder %>%
+  filter(year == 2007, continent == "Asia")
+```
 
-## Q10.1.  Look up the help to understand the data and also run appropriate functions to understand the data. 
+## Given the number of countries, it seems like a good idea to present the top 5 and bottom 5 countries, one at a time, and order the countries by life expectancy. Let's first focus on the top 5 list. Do appropriate wrangling and visualization for the top 5 list.  
 
-## Q10.2.  Include only the records that do not have missing values in the following three variables: dep_time arr_time and air_time.  Convert "dep_time" and "arr_time" to date-time data type, using "year", "month", and "day" as well as the hour and minutes information from "dep_time" and "arr_time". Then select only some useful columns we will need to draw a chart since there are too many columns to display. Those variables are "origin", "dest", "air_time", and any variables that start with 'dep' or 'arr.'  Let's save this subset of the data as "flights_lub." 
+The code below selects the top 5 Asian countries in 2007 based on life expectancy, orders the countries by life expectancy, and creates a presentable bar chart.
 
-## Q10.3.  Using the "dep_time" variable, display the frequency distribution of the count of flights departing from New York City over the entire year in 2013, from Jan. 1 to Dec. 31. 
+```{r}
+# Create the top 5 chart
+top_5_asia <- gapminder %>%
+  filter(year == 2007, continent == "Asia") %>%
+  slice_max(order_by = lifeExp, n = 5) %>%
+  mutate(country = fct_reorder(country, lifeExp))
 
-## ## Q10.4.  This time, let's zoom in on just one day, the Fourth of July holiday. Display the frequency distribution of the flights departing from New York City during the entire day. 
+top_5_plot <- ggplot(top_5_asia, aes(x = country, y = lifeExp, fill = country)) +
+  geom_col(show.legend = FALSE, width = 0.7) +
+  geom_text(aes(label = round(lifeExp, 1)), hjust = -0.1) +
+  coord_flip() +
+  labs(
+    title = "Top 5 Asian Countries by Life Expectancy in 2007",
+    x = "Country",
+    y = "Life Expectancy"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
 
-## Q10.5.  Using the "flights_lub" dataset, create the "travel_time" variable by subtracting "dep_time" from "arr_time". Since arrival occurs later than departure, arr_time minus dep_time should be positive. Check this logic by sorting the data by the ascending order of "travel_time" Was the expectation met? No, because you will see negative minutes of travel_time. Pay attention to the type of data for travel_time. Why were there negative minutes? 
+# Print the chart
+top_5_plot
+```
 
-## Q10.6.  That was because those flights were overnight flights. The original dep_time had only hour and minutes information before day information was added and the time of arrival is smaller than the time of departure for the overnight flights. Thus, we need to fix "arr_time" by adding one more day when there was such an overnight flight. Do the appropriate adjustment prior to the travel_time variable creation in the chain of codes connected through a series of pipe operators. Also, convert the travel_time to a numeric data type.  Show that there are no negative minutes anymore. 
+## Do similar wrangling and visualization to show the bottom 5 countries. (5) This time, let's put the two charts together and show them in one pallet by using the patchwork package <https://patchwork.data-imaginist.com/Links to an external site.>.  The end result should look like this.
 
-## Q10.7.  Once again, zoom in on the Forth of July. How many flights departed from New York City on that day? Create a plot that shows the relationship between the "travel_time" and "air_time" What do you infer from it? Why is there not a perfect association?
+The code below creates a chart for the bottom 5 Asian countries by life expectancy in 2007, and then combines the top 5 and bottom 5 charts into one display using the patchwork package.
+
+```{r}
+# Create the bottom 5 chart
+bottom_5_asia <- gapminder %>%
+  filter(year == 2007, continent == "Asia") %>%
+  slice_min(order_by = lifeExp, n = 5) %>%
+  mutate(country = fct_reorder(country, lifeExp))
+
+bottom_5_plot <- ggplot(bottom_5_asia, aes(x = country, y = lifeExp, fill = country)) +
+  geom_col(show.legend = FALSE, width = 0.7) +
+  geom_text(aes(label = round(lifeExp, 1)), hjust = -0.1) +
+  coord_flip() +
+  labs(
+    title = "Bottom 5 Asian Countries by Life Expectancy in 2007",
+    x = "Country",
+    y = "Life Expectancy"
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+
+# Print the bottom 5 chart
+bottom_5_plot
+```
+
+```{r}
+# Combine the two charts using patchwork
+top_5_plot + bottom_5_plot
+```
+
+#  Date-time data type 
+
+##  Look up the help to understand the data and also run appropriate functions to understand the data. 
+
+```{r}
+# Install packages if needed
+install.packages("nycflights13")
+install.packages("tidyverse")
+install.packages("lubridate")
+
+# Load packages
+library(nycflights13)
+library(tidyverse)
+library(lubridate)
+
+# Open the help file
+?flights
+
+# Examine the dataset
+glimpse(flights)
+head(flights)
+summary(flights)
+```
+
+## Include only the records that do not have missing values in the following three variables: dep_time arr_time and air_time.  Convert "dep_time" and "arr_time" to date-time data type, using "year", "month", and "day" as well as the hour and minutes information from "dep_time" and "arr_time". Then select only some useful columns we will need to draw a chart since there are too many columns to display. Those variables are "origin", "dest", "air_time", and any variables that start with 'dep' or 'arr.'  Let's save this subset of the data as "flights_lub." 
+
+The code below removes rows with missing values in 'dep_time', 'arr_time', and 'air_time'. Then it converts 'dep_time' and 'arr_time' into proper date-time variables by combining the date columns with the hour and minute values. After that, I keep only the requested columns and save the result as 'flights_lub'.
+
+```{r}
+# Create a cleaned subset called flights_lub
+flights_lub <- flights %>%
+  filter(!is.na(dep_time), !is.na(arr_time), !is.na(air_time)) %>%
+  mutate(
+    dep_time = sprintf("%04d", dep_time),
+    arr_time = sprintf("%04d", arr_time),
+    dep_time = make_datetime(
+      year = year,
+      month = month,
+      day = day,
+      hour = as.numeric(substr(dep_time, 1, 2)),
+      min = as.numeric(substr(dep_time, 3, 4))
+    ),
+    arr_time = make_datetime(
+      year = year,
+      month = month,
+      day = day,
+      hour = as.numeric(substr(arr_time, 1, 2)),
+      min = as.numeric(substr(arr_time, 3, 4))
+    )
+  ) %>%
+  select(origin, dest, air_time, starts_with("dep"), starts_with("arr"))
+
+# Print the data to confirm the wrangling worked
+flights_lub
+```
+
+## Using the "dep_time" variable, display the frequency distribution of the count of flights departing from New York City over the entire year in 2013, from Jan. 1 to Dec. 31. 
+
+The chart below displays the frequency distribution of flight departures across the full year of 2013 using the dep_time variable.
+
+```{r}
+# Plot the frequency distribution of departures over the full year
+ggplot(flights_lub, aes(x = dep_time)) +
+  geom_histogram(bins = 50) +
+  labs(
+    title = "Frequency Distribution of NYC Flight Departures in 2013",
+    x = "Departure Date-Time",
+    y = "Count of Flights"
+  ) +
+  theme_minimal()
+```
+
+## This time, let's zoom in on just one day, the Fourth of July holiday. Display the frequency distribution of the flights departing from New York City during the entire day. 
+
+The chart below focuses only on flights departing on July 4, 2013, and shows the frequency distribution during that day.
+
+```{r}
+# Plot the frequency distribution of departures on July 4, 2013
+flights_lub %>%
+  filter(date(dep_time) == ymd("2013-07-04")) %>%
+  ggplot(aes(x = dep_time)) +
+  geom_histogram(bins = 24) +
+  labs(
+    title = "Frequency Distribution of NYC Flight Departures on July 4, 2013",
+    x = "Departure Date-Time",
+    y = "Count of Flights"
+  ) +
+  theme_minimal()
+```
+
+## Using the "flights_lub" dataset, create the "travel_time" variable by subtracting "dep_time" from "arr_time". Since arrival occurs later than departure, arr_time minus dep_time should be positive. Check this logic by sorting the data by the ascending order of "travel_time" Was the expectation met? No, because you will see negative minutes of travel_time. Pay attention to the type of data for travel_time. Why were there negative minutes? 
+
+The code below creates 'travel_time' by subtracting 'dep_time' from 'arr_time', then sorts the data from the smallest value to the largest value. This shows that some values are negative.
+
+```{r}
+# Create travel_time and sort by ascending order
+flights_lub <- flights_lub %>%
+  mutate(travel_time = arr_time - dep_time)
+
+# Print the smallest travel_time values
+flights_lub %>%
+  arrange(travel_time) %>%
+  select(origin, dest, dep_time, arr_time, air_time, travel_time) %>%
+  head(10)
+```
+
+The expectation was not met because some 'travel_time' values are negative. The 'travel_time' variable is a time difference object. The negative values happen because some flights are overnight flights. In those cases, the arrival time is on the next day, but the initial 'arr_time' date was still assigned to the same day as departure.
+
+## That was because those flights were overnight flights. The original dep_time had only hour and minutes information before day information was added and the time of arrival is smaller than the time of departure for the overnight flights. Thus, we need to fix "arr_time" by adding one more day when there was such an overnight flight. Do the appropriate adjustment prior to the travel_time variable creation in the chain of codes connected through a series of pipe operators. Also, convert the travel_time to a numeric data type.  Show that there are no negative minutes anymore. 
+
+```{r}
+# Fix overnight flights and recalculate travel_time in minutes
+flights_lub <- flights %>%
+  filter(!is.na(dep_time), !is.na(arr_time), !is.na(air_time)) %>%
+  mutate(
+    dep_time = sprintf("%04d", dep_time),
+    arr_time = sprintf("%04d", arr_time),
+    dep_time = make_datetime(
+      year = year,
+      month = month,
+      day = day,
+      hour = as.numeric(substr(dep_time, 1, 2)),
+      min = as.numeric(substr(dep_time, 3, 4))
+    ),
+    arr_time = make_datetime(
+      year = year,
+      month = month,
+      day = day,
+      hour = as.numeric(substr(arr_time, 1, 2)),
+      min = as.numeric(substr(arr_time, 3, 4))
+    ),
+    arr_time = if_else(arr_time < dep_time, arr_time + days(1), arr_time),
+    travel_time = as.numeric(difftime(arr_time, dep_time, units = "mins"))
+  ) %>%
+  select(origin, dest, air_time, starts_with("dep"), starts_with("arr"), travel_time)
+
+# Print the smallest travel_time values to confirm there are no negatives
+flights_lub %>%
+  arrange(travel_time) %>%
+  select(origin, dest, dep_time, arr_time, air_time, travel_time) %>%
+  head(10)
+```
+
+## Once again, zoom in on the Forth of July. How many flights departed from New York City on that day? Create a plot that shows the relationship between the "travel_time" and "air_time" What do you infer from it? Why is there not a perfect association?
+
+The code below counts the flights on July 4, 2013, and then creates a scatterplot showing the relationship between 'travel_time' and 'air_time'.
+
+
+```{r}
+# Count flights on July 4, 2013
+flights_lub %>%
+  filter(date(dep_time) == ymd("2013-07-04")) %>%
+  summarise(number_of_flights = n())
+# Plot the relationship between travel_time and air_time for July 4, 2013
+flights_lub %>%
+  filter(date(dep_time) == ymd("2013-07-04")) %>%
+  ggplot(aes(x = air_time, y = travel_time)) +
+  geom_point(alpha = 0.5) +
+  labs(
+    title = "Relationship Between Air Time and Travel Time on July 4, 2013",
+    x = "Air Time (minutes)",
+    y = "Travel Time (minutes)"
+  ) +
+  theme_minimal()
+```
+
+The scatterplot shows a strong positive relationship between 'air_time' and 'travel_time'. This makes sense because flights that spend more time in the air usually also have longer total travel time. However, the relationship is not perfect because travel_time includes more than just time in the air. It can also reflect taxi-out time, taxi-in time, and other delays before takeoff or after landing.
