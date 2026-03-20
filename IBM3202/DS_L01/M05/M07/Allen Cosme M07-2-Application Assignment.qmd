@@ -21,9 +21,9 @@ execute:
   error: true
 ---
 
-# Q1. Vectors
+# Vectors
 
-## Q1.1: Create a numeric vector called "stock_prices" with the following data points: 42.5, 43.0, 44.1, and 2.7. Next, verify the class of it.
+## Create a numeric vector called "stock_prices" with the following data points: 42.5, 43.0, 44.1, and 2.7. Next, verify the class of it.
 
 ```{r}
 # Create a numeric vector of stock prices
@@ -36,7 +36,7 @@ stock_prices
 class(stock_prices)
 ```
 
-## Q1.2: Create a character vector called "company_names" with the following data points: "Apple", "Google", "Microsoft", and "Tesla".
+## Create a character vector called "company_names" with the following data points: "Apple", "Google", "Microsoft", and "Tesla".
 
 ```{r}
 # Create a character vector of company names
@@ -46,7 +46,7 @@ stock_company <- c("Microsoft", "Apple", "Facebook", "Tesla")
 stock_company
 ```
 
-## Q1.3: Create a character vector called "stock_ticker" consisting of stock tickers corresponding to the companies in the "stock_company" vector: MSFT, AAPL, FB, and TSLA. Then verify its data type.
+## Create a character vector called "stock_ticker" consisting of stock tickers corresponding to the companies in the "stock_company" vector: MSFT, AAPL, FB, and TSLA. Then verify its data type.
 
 ```{r}
 # Create a character vector of stock tickers
@@ -59,7 +59,7 @@ stock_ticker
 class(stock_ticker)
 ```
 
-## Q1.4: Create a logical vector called "make_cars" consisting of the four logical values: FALSE, FALSE, FALSE, and TRUE. 
+##  Create a logical vector called "make_cars" consisting of the four logical values: FALSE, FALSE, FALSE, and TRUE. 
 
 ```{r}
 # Create a logical vector showing whether each company makes cars
@@ -72,7 +72,7 @@ make_cars
 class(make_cars)
 ```
 
-## Q1.5:  After that, add 5 to the vector "stock_prices" and assign the result to the same "stock_prices" vector, essentially updating the existing stock prices vector. 
+## After that, add 5 to the vector "stock_prices" and assign the result to the same "stock_prices" vector, essentially updating the existing stock prices vector. 
 
 ```{r}
 # Add 5 to each element in the stock_prices vector and update it
@@ -80,7 +80,7 @@ stock_prices <- stock_prices + 5
 # Print the updated stock_prices vector to confirm the changes
 stock_prices
 ```
-## Q1.6: Name each element in "stock_prices"  vector, using the "stock_company" vector that you created above, and print the stock_prirces vector to confirm that each element has a company name associated with it.
+## Name each element in "stock_prices"  vector, using the "stock_company" vector that you created above, and print the stock_prirces vector to confirm that each element has a company name associated with it.
 
 ```{r}
 # Assign company names to the stock_prices vector
@@ -90,93 +90,343 @@ names(stock_prices) <- stock_company
 stock_prices
 ```
 
-# Q2.  Creating and cleaning a data frame in base R (0.5 pts)
+# Creating and cleaning a data frame in base R (0.5 pts)
 
-## Q2.1:  Create a data frame called "stock_info.df" which is composed of the four vectors created in exercises #2 and #3 above. Verify the number of rows and columns, and also display the summary.  
+## Create a data frame called "stock_info.df" which is composed of the four vectors created in exercises #2 and #3 above. Verify the number of rows and columns, and also display the summary.  
 
-## Q2.2:  (1) Let's suppose that there was a data entry error in "stock_prices" vector such that Tesla's original stock price was 42.7, not 2.7. Also, note that previously you updated the stock price by adding 5 to all elements in the stock_prices vector, making the updated stock price of Tesla 7.7.  (2) Now that we know there was a data entry error, we need to update Tesla's stock price correctly in the data frame created earlier. In short, we need to replace 7.7 with 47.7, which would have been the correct stock price for Tesla in the previous exercise, had there not been an error in the first place. (3) Do the necessary coding to execute the correction to the stock_info.df data frame. Confirm the operation was successful by printing the data frame.
+```{r}
+# Create a data frame using the four vectors created earlier
+stock_info.df <- data.frame(
+  stock_company = stock_company,
+  stock_ticker = stock_ticker,
+  stock_prices = stock_prices,
+  make_cars = make_cars
+)
 
-# Q3.  Adding a row or column to a data frame in base R
+# Print the data frame to confirm it was created correctly
+stock_info.df
 
-Q3.1:  (1) Add a new row to the bottom of the existing "stock_info.df" data frame with the following information: stock_prices = 50.4, stock_company = General Motors, stock_ticker = GM, and make_cars = TRUE. (2) Print out the updated data frame.  (3) Do you see the row name of the last row is "1"? You may want to replace this with the correct name, "General Motors." Print the data frame again to confirm you fixed the problem.
+# Verify the number of rows and columns
+nrow(stock_info.df)
+ncol(stock_info.df)
 
-Hint: You may create a data frame with its four elements set as described above and then use rbind() to append it to the existing data frame, "stock_info.df". Also, see how to change row names in RLinks to an external site. to change row names. 
+# Display the summary of the data frame
+summary(stock_info.df)
+```
 
-Q3.2  (1) Add a new column with the following column name and values: open_price = 47.3, 47.8, 49.5, 47.9 and 55.3.  (2) Print out the updated data frame, "stock_info.df" to confirm your work.
+## (1) Let's suppose that there was a data entry error in "stock_prices" vector such that Tesla's original stock price was 42.7, not 2.7. Also, note that previously you updated the stock price by adding 5 to all elements in the stock_prices vector, making the updated stock price of Tesla 7.7.  (2) Now that we know there was a data entry error, we need to update Tesla's stock price correctly in the data frame created earlier. In short, we need to replace 7.7 with 47.7, which would have been the correct stock price for Tesla in the previous exercise, had there not been an error in the first place. (3) Do the necessary coding to execute the correction to the stock_info.df data frame. Confirm the operation was successful by printing the data frame.
 
-# Q4. Creating a new column from existing columns and subsetting
+```{r}
+# Correct Tesla's stock price in the data frame
+stock_info.df$stock_prices[stock_info.df$stock_company == "Tesla"] <- 47.7
 
-Q4.1:  Now, create a new vector called "change_stock_prices_percent" and add it to the existing data frame to show if the stock increased or decreased its price at the end of the day compared to the beginning of the day.
+# Print the updated data frame to confirm the correction worked
+stock_info.df
+```
 
-Hints: Consider the stock_prices as the closing prices of the stocks for the day. The change_stock_prices_percent can then be calculated as: [(closing price - open price) / open price * 100]. If the outcome is negative value, the stock price has decreased. If the outcome is positive value, stock price has increased. If you are not familiar with the meaning of the operators in the formula above, note the following:
+#  Adding a row or column to a data frame in base R
 
-- : subtraction
-/ : division
-* : multiplication.
-The resulting output would look like this:
+## (1) Add a new row to the bottom of the existing "stock_info.df" data frame with the following information: stock_prices = 50.4, stock_company = General Motors, stock_ticker = GM, and make_cars = TRUE. (2) Print out the updated data frame.  (3) Do you see the row name of the last row is "1"? You may want to replace this with the correct name, "General Motors." Print the data frame again to confirm you fixed the problem.
 
-A screenshot of the output of Q9.
+```{r}
+# Create a new one-row data frame for General Motors
+new_row <- data.frame(
+  stock_company = "General Motors",
+  stock_ticker = "GM",
+  stock_prices = 50.4,
+  make_cars = TRUE
+)
 
-Q4.2:  Which stock has increased its value and which ones have decreased? Use the function "subset" to select the two types of stocks. 
+# Append the new row to the existing data frame
+stock_info.df <- rbind(stock_info.df, new_row)
 
-# Q5.  Matrix 
+# Print the updated data frame
+stock_info.df
+
+# Change the row name of the last row to "General Motors"
+rownames(stock_info.df)[nrow(stock_info.df)] <- "General Motors"
+
+# Print the data frame again to confirm the row name was fixed
+stock_info.df
+```
+
+## (1) Add a new column with the following column name and values: open_price = 47.3, 47.8, 49.5, 47.9 and 55.3.  (2) Print out the updated data frame, "stock_info.df" to confirm your work.
+
+```{r}
+# Add a new column called open_price
+stock_info.df$open_price <- c(47.3, 47.8, 49.5, 47.9, 55.3)
+
+# Print the updated data frame to confirm the new column was added
+stock_info.df
+```
+
+# Creating a new column from existing columns and subsetting
+
+##  Now, create a new vector called "change_stock_prices_percent" and add it to the existing data frame to show if the stock increased or decreased its price at the end of the day compared to the beginning of the day.
+
+```{r}
+# Calculate the percent change from open price to closing price
+change_stock_prices_percent <- ((stock_info.df$stock_prices - stock_info.df$open_price) / stock_info.df$open_price) * 100
+
+# Add the new vector as a column in the data frame
+stock_info.df$change_stock_prices_percent <- change_stock_prices_percent
+
+# Print the updated data frame to confirm the new column was added
+stock_info.df
+```
+
+## Which stock has increased its value and which ones have decreased? Use the function "subset" to select the two types of stocks. 
+
+```{r}
+# Subset stocks that increased in value
+stocks_increased <- subset(stock_info.df, change_stock_prices_percent > 0)
+
+# Print stocks that increased
+stocks_increased
+
+# Subset stocks that decreased in value
+stocks_decreased <- subset(stock_info.df, change_stock_prices_percent < 0)
+
+# Print stocks that decreased
+stocks_decreased
+```
+
+# Matrix 
 
 Create a matrix named "odd.mat" that consists of odd numbers starting with "1" with 10 columns and 5 rows. Do the task in both Base R and Tidyverse way, respectively.
 
-Hints: You can type 50 odd numbers directly, but this is not the best way. preferably, you can use a function called seq() as follows: seq(from = 1, by = 2, length.out = 50).
+```{r}
+# Tidyverse approach:
+library(tidyverse)
 
-# Q6.  Strings: Sentences dataset
+# Create the same sequence of odd numbers with tibble/dplyr workflow
+odd_numbers_tbl <- tibble(odd_numbers = seq(from = 1, by = 2, length.out = 50))
 
-The goal of this question is to generate insights about the frequencies of the use of the definite article, "The" in the English composition. 
+# Convert the column to a matrix with 5 rows and 10 columns
+odd.mat <- matrix(odd_numbers_tbl$odd_numbers, nrow = 5, ncol = 10)
 
-(1) From "sentences" data that comes with stringr, which is included in Tidyverse package, confirm that you can correctly identify the first word from each sentence correctly by showing the first word from each sentence for all the sentences in the dataset. (2) Then, extract those first words and print out the first 20 words in the list of words extracted. Make sure you delete any white spaces, if any,  before and after each extracted word. (3) Out of the words you extracted, how many times does the word, "The," appear in the list? (4) What proportion of the extracted words does "The" account for? (5) Does the outcome surprise you? Explain why or why not. (6) Calculate the number of sentences that start with the word, "The"  again, this time, using only one chain of codes with a series of the piping operator, starting with the "sentences" data set. Next, using a similar operation, calculate the proportion again.
+# Print the matrix to confirm it was created correctly
+odd.mat
+```
+
+# Strings: Sentences dataset
+
+```{r}
+library(tidyverse)
+
+# Load the sentences dataset from stringr
+data("sentences", package = "stringr")
+
+# Extract the first word from each sentence and trim white spaces
+first_words <- word(sentences, 1, 1) %>%
+  str_trim()
+
+# Print all extracted first words to confirm the operation worked
+first_words
+```
+
+## Extract those first words and print out the first 20 words in the list of words extracted. Make sure you delete any white spaces, if any, before and after each extracted word.
+
+This step prints only the first 20 extracted words so I can verify that the extraction was done correctly.
+
+```{r}
+# Print the first 20 extracted words
+first_words[1:20]
+```
+
+## Out of the words you extracted, how many times does the word, “The,” appear in the list?
+
+The word "The" appears 256 times in the extracted first-word list.
+
+```{r}
+# Count how many times "The" appears
+the_count <- sum(first_words == "The")
+
+# Print the count
+the_count
+```
+
+## What proportion of the extracted words does “The” account for?
+
+The proportion of extracted first words that are "The" is 0.3555556, which is about 35.56%.
+
+```{r}
+# Calculate the proportion of first words that are "The"
+the_proportion <- the_count / length(first_words)
+
+# Print the proportion
+the_proportion
+```
+
+## Does the outcome surprise you? Explain why or why not.
+
+The result does not surprise me very much. Since these are short English practice sentences, many of them begin with simple noun phrases such as “The boy,” “The girl,” or “The ship.” Because of that writing style, it makes sense that “The” appears often as the first word. At the same time, it is still interesting that more than one-third of the sentences start with the same word.
+
+```{r}
+# Optional check: total number of sentences
+length(first_words)
+```
+
+## Calculate the number of sentences that start with the word, “The” again, this time, using only one chain of codes with a series of the piping operator, starting with the “sentences” data set. Next, using a similar operation, calculate the proportion again.
+
+The code below repeats the calculation using a single pipe chain that starts with the sentences data set. I then use a similar chain to calculate the proportion again.
+
+```{r}
+# Count the number of sentences that start with "The" using one pipe chain
+sentences %>%
+  word(1, 1) %>%
+  str_trim() %>%
+  {\(x) sum(x == "The")}()
+# Calculate the proportion of sentences that start with "The" using one pipe chain
+sentences %>%
+  word(1, 1) %>%
+  str_trim() %>%
+  {\(x) sum(x == "The") / length(x)}()
+```
 
 # Q7.  Strings: Baseball player stats in Lahman dataset
 
-From the "People" dataset in the Lahman package, get all John's and Joe's from the first name column and display how many Joe's and John's there are in the dataset. Visualize the count of the two first names in a chart too. As usual, make the chart presentable.
+```{r}
+# Install packages if needed
+install.packages("Lahman")
+install.packages("tidyverse")
 
-*Hints*: You need to install Lahman package first and access "People" dataset that comes with the package. The dataset has information and statistics about baseball players such as Player names, DOB, and biographical info. This file is to be used to get details about players listed in the Batting, Pitching, and other files where players are identified only by playerID. For more information look up the help.
+# Load packages
+library(Lahman)
+library(tidyverse)
+
+# Access the People dataset
+data("People")
+
+# Filter for first names John and Joe, then count them
+john_joe_counts <- People %>%
+  filter(nameFirst %in% c("John", "Joe")) %>%
+  count(nameFirst)
+
+# Print the counts to confirm the operation worked
+john_joe_counts
+```
 
 # Q8.  Factor-level ordering and Visualization
 
-Install "gapminder" package if you don't have it already.
+##
 
-Q8.1:  (1) From the package, use "gapminder" dataset. Examine the dataset to know it first. (1) First, print out the level of the "continent" factor from the gapminder data set. (2) From the most recent year in the dataset, calculate the total population by the continents and print out the outcome. (3) Print out the continent and total population again by arranging the appearance of the continent in descending order of the size of the population. (4) Compare both tables produced in (2) and (3) and describe how the order is different. Note that you haven't changed the factor level yet. Also, state how you could change the level of the factor by the descending order of the population size. (5) change the order of the level of the "continent" factor by the size of the continent's total population and save the change made to the continent by naming the data "gapminder1". Make sure you confirm the operation was successful. 
+(1) From the package, use "gapminder" dataset. Examine the dataset to know it first. 
+(1) First, print out the level of the "continent" factor from the gapminder data set.
+(2) From the most recent year in the dataset, calculate the total population by the continents and print out the outcome. 
+(3) Print out the continent and total population again by arranging the appearance of the continent in descending order of the size of the population. 
+(4) Compare both tables produced in (2) and (3) and describe how the order is different. Note that you haven't changed the factor level yet. Also, state how you could change the level of the factor by the descending order of the population size. 
+(5) change the order of the level of the "continent" factor by the size of the continent's total population and save the change made to the continent by naming the data "gapminder1". Make sure you confirm the operation was successful. 
 
-Q8.2:  (1) Using the original gapminder data (not gapminder1), draw a chart that shows the total population by each continent in the year 2007, ordered by the size of the population in the chart. As usual, do this in one chain of codes and provide the necessary information and beautification to the chart to portray accurate communication to the viewers.
+```{r}
+# Install packages if needed
+install.packages("gapminder")
+install.packages("tidyverse")
 
-*Hints*: You don't need to confirm the success of the intended wrangling in a table format since you can confirm it in the chart. This way, you can avoid breaking the chain to confirm the level. 
+# Load packages
+library(gapminder)
+library(tidyverse)
+
+# Examine the dataset
+glimpse(gapminder)
+
+# Print the factor levels of continent
+levels(gapminder$continent)
+
+# Find the most recent year in the dataset
+most_recent_year <- max(gapminder$year)
+
+# Calculate total population by continent for the most recent year
+continent_pop <- gapminder %>%
+  filter(year == most_recent_year) %>%
+  group_by(continent) %>%
+  summarise(total_population = sum(pop))
+
+# Print the summary table
+continent_pop
+
+# Arrange the table in descending order of total population
+continent_pop_desc <- continent_pop %>%
+  arrange(desc(total_population))
+
+# Print the arranged table
+continent_pop_desc
+```
+
+The first table keeps the original factor order of continent, while the second table sorts the rows by total population in descending order. This means the rows are displayed differently, but the factor levels themselves have not changed yet. To change the factor levels by descending population size, I can use fct_reorder() from the forcats package and reorder continent using the total population values.
+
+```{r}
+# Create a reordered factor for continent based on total population in the most recent year
+continent_order <- gapminder %>%
+  filter(year == most_recent_year) %>%
+  group_by(continent) %>%
+  summarise(total_population = sum(pop)) %>%
+  mutate(continent = fct_reorder(continent, total_population, .desc = TRUE)) %>%
+  select(continent)
+
+# Save the reordered continent factor into a new dataset called gapminder1
+gapminder1 <- gapminder %>%
+  mutate(continent = factor(continent,
+                            levels = levels(continent_order$continent)))
+
+# Confirm the operation was successful by printing the new factor levels
+levels(gapminder1$continent)
+```
+
+## 
+
+(1) Using the original gapminder data (not gapminder1), draw a chart that shows the total population by each continent in the year 2007, ordered by the size of the population in the chart. As usual, do this in one chain of codes and provide the necessary information and beautification to the chart to portray accurate communication to the viewers.
+
+The chart below uses the original gapminder data, filters the year 2007, calculates total population by continent, reorders the continent names within the plotting code, and creates a presentable bar chart in one chain of code
+
+```{r}
+gapminder %>%
+  filter(year == 2007) %>%
+  group_by(continent) %>%
+  summarise(total_population = sum(pop)) %>%
+  ggplot(aes(x = fct_reorder(continent, total_population, .desc = TRUE),
+             y = total_population,
+             fill = continent)) +
+  geom_col(show.legend = FALSE, width = 0.7) +
+  geom_text(aes(label = scales::comma(total_population)),
+            vjust = -0.3,
+            size = 3.5) +
+  labs(
+    title = "Total Population by Continent in 2007",
+    x = "Continent",
+    y = "Total Population"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5)
+  )
+```
 
 # Q9.  Shortening Factor Levels: top or bottom 5 lists
 
-The goal is to draw a chart that shows the top and bottom Asian countries by life expectancy in 2007. To do so, do the following:
+## Q9.1: let's first filter the unaltered gapminder dataset by the year 2007 and Asia continent and see how many countries there are in the filtered data. Do this using the piping operator all the time.
 
-Q9.1: let's first filter the unaltered gapminder dataset by the year 2007 and Asia continent and see how many countries there are in the filtered data. Do this using the piping operator all the time.
+## Q9.2: How many Asian countries do you see? Given
 
-Q9.2: How many Asian countries do you see? Given
+## Q9.3: Given the number of countries, it seems like a good idea to present the top 5 and bottom 5 countries, one at a time, and order the countries by life expectancy. Let's first focus on the top 5 list. Do appropriate wrangling and visualization for the top 5 list.  
 
-Q9.3: Given the number of countries, it seems like a good idea to present the top 5 and bottom 5 countries, one at a time, and order the countries by life expectancy. Let's first focus on the top 5 list. Do appropriate wrangling and visualization for the top 5 list.  
-
-*Hints*: Use functions from dplyr package to deal with top and bottom rankings. The function that will be most effective in finding the top or bottom five list would be slice_max() and slice_min(), respectively.
-
-Q9.4: Do similar wrangling and visualization to show the bottom 5 countries. (5) This time, let's put the two charts together and show them in one pallet by using the patchwork package <https://patchwork.data-imaginist.com/Links to an external site.>.  The end result should look like this.
+## Q9.4: Do similar wrangling and visualization to show the bottom 5 countries. (5) This time, let's put the two charts together and show them in one pallet by using the patchwork package <https://patchwork.data-imaginist.com/Links to an external site.>.  The end result should look like this.
 
 Top 5 and Bottom five Asian countries for life expectancy
 
 # Q10:   Date-time data type (2 pts)
 
-The goal is to deal with date-time data and visualize the data. The data is from the "flights" dataset that comes with the nycflights13 package. If you don't have it install the package and load up the data. 
+## Q10.1.  Look up the help to understand the data and also run appropriate functions to understand the data. 
 
-Q10.1.  Look up the help to understand the data and also run appropriate functions to understand the data. 
+## Q10.2.  Include only the records that do not have missing values in the following three variables: dep_time arr_time and air_time.  Convert "dep_time" and "arr_time" to date-time data type, using "year", "month", and "day" as well as the hour and minutes information from "dep_time" and "arr_time". Then select only some useful columns we will need to draw a chart since there are too many columns to display. Those variables are "origin", "dest", "air_time", and any variables that start with 'dep' or 'arr.'  Let's save this subset of the data as "flights_lub." 
 
-Q10.2.  Include only the records that do not have missing values in the following three variables: dep_time arr_time and air_time.  Convert "dep_time" and "arr_time" to date-time data type, using "year", "month", and "day" as well as the hour and minutes information from "dep_time" and "arr_time". Then select only some useful columns we will need to draw a chart since there are too many columns to display. Those variables are "origin", "dest", "air_time", and any variables that start with 'dep' or 'arr.'  Let's save this subset of the data as "flights_lub." 
+## Q10.3.  Using the "dep_time" variable, display the frequency distribution of the count of flights departing from New York City over the entire year in 2013, from Jan. 1 to Dec. 31. 
 
-Q10.3.  Using the "dep_time" variable, display the frequency distribution of the count of flights departing from New York City over the entire year in 2013, from Jan. 1 to Dec. 31. 
+## ## Q10.4.  This time, let's zoom in on just one day, the Fourth of July holiday. Display the frequency distribution of the flights departing from New York City during the entire day. 
 
-Q10.4.  This time, let's zoom in on just one day, the Fourth of July holiday. Display the frequency distribution of the flights departing from New York City during the entire day. 
+## Q10.5.  Using the "flights_lub" dataset, create the "travel_time" variable by subtracting "dep_time" from "arr_time". Since arrival occurs later than departure, arr_time minus dep_time should be positive. Check this logic by sorting the data by the ascending order of "travel_time" Was the expectation met? No, because you will see negative minutes of travel_time. Pay attention to the type of data for travel_time. Why were there negative minutes? 
 
-Q10.5.  Using the "flights_lub" dataset, create the "travel_time" variable by subtracting "dep_time" from "arr_time". Since arrival occurs later than departure, arr_time minus dep_time should be positive. Check this logic by sorting the data by the ascending order of "travel_time" Was the expectation met? No, because you will see negative minutes of travel_time. Pay attention to the type of data for travel_time. Why were there negative minutes? 
+## Q10.6.  That was because those flights were overnight flights. The original dep_time had only hour and minutes information before day information was added and the time of arrival is smaller than the time of departure for the overnight flights. Thus, we need to fix "arr_time" by adding one more day when there was such an overnight flight. Do the appropriate adjustment prior to the travel_time variable creation in the chain of codes connected through a series of pipe operators. Also, convert the travel_time to a numeric data type.  Show that there are no negative minutes anymore. 
 
-Q10.6.  That was because those flights were overnight flights. The original dep_time had only hour and minutes information before day information was added and the time of arrival is smaller than the time of departure for the overnight flights. Thus, we need to fix "arr_time" by adding one more day when there was such an overnight flight. Do the appropriate adjustment prior to the travel_time variable creation in the chain of codes connected through a series of pipe operators. Also, convert the travel_time to a numeric data type.  Show that there are no negative minutes anymore. 
-
-Q10.7.  Once again, zoom in on the Forth of July. How many flights departed from New York City on that day? Create a plot that shows the relationship between the "travel_time" and "air_time" What do you infer from it? Why is there not a perfect association?
+## Q10.7.  Once again, zoom in on the Forth of July. How many flights departed from New York City on that day? Create a plot that shows the relationship between the "travel_time" and "air_time" What do you infer from it? Why is there not a perfect association?
