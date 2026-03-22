@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Allen Cosme">
-<meta name="dcterms.date" content="2026-03-20">
+<meta name="dcterms.date" content="2026-03-22">
 
 <title>M07-2-Application Assignment for R Data Types</title>
 <style>
@@ -3560,7 +3560,7 @@ window.onload = function() {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 20, 2026</p>
+      <p class="date">March 22, 2026</p>
     </div>
   </div>
   
@@ -4312,7 +4312,7 @@ $ gdpPercap &lt;dbl&gt; 779.4453, 820.8530, 853.1007, 836.1971, 739.9811, 786.11
 </div>
 </div>
 </div>
-<p>The first table keeps the original factor order of continent, while the second table sorts the rows by total population in descending order. This means the rows are displayed differently, but the factor levels themselves have not changed yet. To change the factor levels by descending population size, I can use fct_reorder() from the forcats package and reorder continent using the total population values.</p>
+<p>The first table keeps the original factor order of continent, while the second table sorts the rows by total population in descending order. This means the rows are displayed differently, but the factor levels themselves have not changed yet. To change the factor levels by descending population size, I can use ‘fct_reorder()’ from the forcats package and reorder continent using the total population values.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb45-1"><a href="#cb45-1"></a><span class="in">```{r}</span></span>
 <span id="cb45-2"><a href="#cb45-2"></a><span class="co"># Create a reordered factor for continent based on total population in the most recent year</span></span>
@@ -4623,7 +4623,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </section>
 <section id="include-only-the-records-that-do-not-have-missing-values-in-the-following-three-variables-dep_time-arr_time-and-air_time.-convert-dep_time-and-arr_time-to-date-time-data-type-using-year-month-and-day-as-well-as-the-hour-and-minutes-information-from-dep_time-and-arr_time.-then-select-only-some-useful-columns-we-will-need-to-draw-a-chart-since-there-are-too-many-columns-to-display.-those-variables-are-origin-dest-air_time-and-any-variables-that-start-with-dep-or-arr.-lets-save-this-subset-of-the-data-as-flights_lub." class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="include-only-the-records-that-do-not-have-missing-values-in-the-following-three-variables-dep_time-arr_time-and-air_time.-convert-dep_time-and-arr_time-to-date-time-data-type-using-year-month-and-day-as-well-as-the-hour-and-minutes-information-from-dep_time-and-arr_time.-then-select-only-some-useful-columns-we-will-need-to-draw-a-chart-since-there-are-too-many-columns-to-display.-those-variables-are-origin-dest-air_time-and-any-variables-that-start-with-dep-or-arr.-lets-save-this-subset-of-the-data-as-flights_lub."><span class="header-section-number">10.2</span> Include only the records that do not have missing values in the following three variables: dep_time arr_time and air_time. Convert “dep_time” and “arr_time” to date-time data type, using “year”, “month”, and “day” as well as the hour and minutes information from “dep_time” and “arr_time”. Then select only some useful columns we will need to draw a chart since there are too many columns to display. Those variables are “origin”, “dest”, “air_time”, and any variables that start with ‘dep’ or ‘arr.’ Let’s save this subset of the data as “flights_lub.”</h2>
-<p>The code below removes rows with missing values in dep_time, arr_time, and air_time. Then it converts dep_time and arr_time into proper date-time variables by combining the date columns with the hour and minute values. After that, I keep only the requested columns and save the result as flights_lub.</p>
+<p>The code below removes rows with missing values in ‘dep_time’, ‘arr_time’, and ‘air_time’. Then it converts ‘dep_time’ and ‘arr_time’ into proper date-time variables by combining the date columns with the hour and minute values. After that, I keep only the requested columns and save the result as ‘flights_lub’.</p>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb62"><pre class="sourceCode numberSource markdown number-lines code-with-copy"><code class="sourceCode markdown"><span id="cb62-1"><a href="#cb62-1"></a><span class="in">```{r}</span></span>
 <span id="cb62-2"><a href="#cb62-2"></a><span class="co"># Create a cleaned subset called flights_lub</span></span>
@@ -4734,7 +4734,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 </div>
-<p>The expectation was not met because some travel_time values are negative. The travel_time variable is a time difference object. The negative values happen because some flights are overnight flights. In those cases, the arrival time is on the next day, but the initial arr_time date was still assigned to the same day as departure.</p>
+<p>The expectation was not met because some ‘travel_time’ values are negative. The ‘travel_time’ variable is a time difference object. The negative values happen because some flights are overnight flights. In those cases, the arrival time is on the next day, but the initial ‘arr_time’ date was still assigned to the same day as departure.</p>
 </section>
 <section id="that-was-because-those-flights-were-overnight-flights.-the-original-dep_time-had-only-hour-and-minutes-information-before-day-information-was-added-and-the-time-of-arrival-is-smaller-than-the-time-of-departure-for-the-overnight-flights.-thus-we-need-to-fix-arr_time-by-adding-one-more-day-when-there-was-such-an-overnight-flight.-do-the-appropriate-adjustment-prior-to-the-travel_time-variable-creation-in-the-chain-of-codes-connected-through-a-series-of-pipe-operators.-also-convert-the-travel_time-to-a-numeric-data-type.-show-that-there-are-no-negative-minutes-anymore." class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="that-was-because-those-flights-were-overnight-flights.-the-original-dep_time-had-only-hour-and-minutes-information-before-day-information-was-added-and-the-time-of-arrival-is-smaller-than-the-time-of-departure-for-the-overnight-flights.-thus-we-need-to-fix-arr_time-by-adding-one-more-day-when-there-was-such-an-overnight-flight.-do-the-appropriate-adjustment-prior-to-the-travel_time-variable-creation-in-the-chain-of-codes-connected-through-a-series-of-pipe-operators.-also-convert-the-travel_time-to-a-numeric-data-type.-show-that-there-are-no-negative-minutes-anymore."><span class="header-section-number">10.6</span> That was because those flights were overnight flights. The original dep_time had only hour and minutes information before day information was added and the time of arrival is smaller than the time of departure for the overnight flights. Thus, we need to fix “arr_time” by adding one more day when there was such an overnight flight. Do the appropriate adjustment prior to the travel_time variable creation in the chain of codes connected through a series of pipe operators. Also, convert the travel_time to a numeric data type. Show that there are no negative minutes anymore.</h2>
@@ -4816,7 +4816,7 @@ $ time_hour      &lt;dttm&gt; 2013-01-01 05:00:00, 2013-01-01 05:00:00, 2013-01-
 </div>
 </div>
 </div>
-<p>The scatterplot should show a strong positive relationship between air_time and travel_time. This makes sense because flights that spend more time in the air usually also have longer total travel time. However, the relationship is not perfect because travel_time includes more than just time in the air. It can also reflect taxi-out time, taxi-in time, and other delays before takeoff or after landing.</p>
+<p>The scatterplot shows a strong positive relationship between ‘air_time’ and ‘travel_time’. This makes sense because flights that spend more time in the air usually also have longer total travel time. However, the relationship is not perfect because travel_time includes more than just time in the air. It can also reflect taxi-out time, taxi-in time, and other delays before takeoff or after landing.</p>
 </section>
 </section>
 
