@@ -1,0 +1,43 @@
+---
+title: "M08-Reflection Essay-Advanced Data Types"
+subtitle: "Revealjs Presentation"
+author: "Allen Cosme"
+institute: "IBM3202, Cal Poly Pomona"
+date: "`today()`"
+format: 
+  revealjs:
+    theme: serif
+    width: 1600
+    height: 900
+    footer: "Allen Cosme | IBM3202 | Cal Poly Pomona"
+    transition: slide
+    transition-speed: default
+    incremental: false
+    toc: true
+    toc-depth: 1
+    slide-number: true
+    scrollable: true
+    smaller: true
+    code-fold: false
+    code-overflow: wrap
+    number-sections: false
+    number-depth: 5
+    embed-resources: true
+    css: styles.css
+editor: visual
+execute: 
+  echo: true
+  freeze: auto
+---
+
+In Step 1, Dr. Dave Robinson demonstrated how you can deal with various data types using string, forecast, and lubricate packages. Pick three functions he used and how it helped him achieve his wrangling goals.
+
+Summarize the presentation by Dr. Pat Scholoss, a Professor at the University of Michigan, on how to deal with date data in Step 2. How much were you able to understand his presentation? compare his style with Dave Robinson's. What do you like or dislike?
+
+In Step 3, I introduced the common usage of gtsummary, which can be useful for school work. Summarize the package's capabilities as explained. How may the {gtsummary} benefit you for your school work or career? In Step 4, you watched the extended presentation of the {gtsummary} package by Dr. Daniel Dsjoberg, the very creator of the package. How does it differ from gt and gtExtras? Give three things you learned newly that were not explained in the lecture in Step 3.
+
+In Step 5, you explored my advanced codebook. Pick one new interesting function from each of the three topics -- strings, factor, and date-time -- that was not introduced in M07. Describe what they are and what they can do for you. While doing so, use actual codes and outputs.
+
+I will repeat this again here. Data wrangling is like laying a foundation/basement for a building, while visualization is building a structure above the basement. working in a basement is not a glamorous job at all. No one notices it; people will see what they can see above the ground and judge it, but without the hard work you did in the basement, the building will never stand well. Wrangling with strings and date-time data is particularly hard because we don't get to use it as often as we use numeric data. However, you will get to use factors often, so get used to them soon.
+
+What did you like the most about working with the tools you learned in this module? Elaborate on your point. By this time, I hope you found a way to deal with your challenges well. If you still have a problem and want to consult with me, you can come to see me during my office hours. How much time have you been able to study for this module? Which steps have you been able to study thoroughly?
