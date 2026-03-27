@@ -1,0 +1,132 @@
+---
+title: "RPE Project Group 5"
+subtitle: "impact of professionalism on perceived value of participation
+format:
+    html:
+        theme: 
+            light: flatly
+            dark: Darkly
+        toc: true
+        toc-depth: 3
+        toc-expand: 1
+        toc-location: right-body
+        number-sections: true
+        embed-resources: true
+excecute: true
+    cache: true
+    freeze: auto
+    echo: fenced    
+---
+
+# introduction
+
+## Problem definition
+
+## Research Objectives
+
+To investigate the impact of professionalism on the perceived value of participation in a education
+
+## Importance of the Topic
+
+## Methods
+
+## Sampling/Data collection
+
+## Data wrangling and preparation
+
+### setup
+```{r}
+library(tidyverse)
+# install.packages("haven")
+library(haven)
+# install.packages("sjPlot")
+library(sjPlot)
+# install.packages("janitor")
+library(janitor)
+
+# read data 
+data <- read_sav("data/(RPE- Combined-2019-12-19.sav)") 
+```
+
+```{r}
+data |>
+    view_df()
+
+data <- data |> clean_names()
+
+data |>
+    view_df()
+
+data |> 
+    count()
+```
+## RQ1 / H1
+
+###  Matthew Mayer
+
+-   **H1**: Researcher professionalism has a positive effect on participants’ perceived value of participation. **independent Variable (IV)**: Researcher Professionalism **Dependent Variable (DV)**: Perceived Value of Participation
+
+#### IV's and DV's
+- **independent Variable (IV)**: Researcher Professionalism 
+- **Dependent Variable (DV)**: Perceived Value of Participation
+
+## Plan for Data wrangling
+
+## Plan for Data visualization
+
+## RQ2 / H2
+
+### Harrison Gan
+
+-   **Research Objective**: To Find Researcher’s Professionalism
+
+-   **Hypothesis**: Researcher’s professionalism will make people more willing to give their quality input on the survey. Research Question: How does a Researcher’s professionalism help the honesty of the research?
+## IV's and DV's
+
+## Plan for Data wrangling
+
+## Plan for Data visualization
+
+## RQ3 / H3
+
+### Amir Alnajjar
+
+-  **H1**: Higher levels of researcher professionalism are positively associated with the perceived value of participation among study participants. - Amir Alnajjar 
+- **H1 (expanded)**: Participants who perceive researchers as professional (e.g., respectful, organized, and ethical) will report higher satisfaction and greater perceived value from their participation. - Amir Alnajjar
+
+## IV's and DV's
+
+## Plan for Data wrangling
+
+## Plan for Data visualization
+
+## RQ4/ H4
+
+### Allen Cosme
+
+-   **Research Question**: How does researchers’ professionalism influence their attitudes and behavioral intentions in conducting ethical and high-quality research?
+
+-   **Hypotheses**: H1: Higher levels of professionalism among researchers are significantly associated with more positive attitudes toward ethical research practices. H2: Higher levels of professionalism among researchers are significantly associated with stronger intentions to follow ethical standards and maintain research quality. H3: Researchers’ positive attitudes mediate the relationship between professionalism and their intentions to conduct responsible research.
+
+## IV's and DV's
+
+## Plan for Data wrangling
+
+## Plan for Data visualization
+
+## RQ5 / H5
+
+### Ari Nurhadi
+
+-   **Research Objective**: To examine how researcher professionalism influences participants’ trust and willingness to provide honest and high-quality responses in a study.
+-   **Research Question**: How does researcher professionalism affect participants’ trust and their likelihood of providing accurate and meaningful responses? Hypothesis:
+    -   H1: Higher levels of researcher professionalism are positively associated with greater participant trust, which in turn increases the likelihood of honest and high-quality responses.
+
+## IV's and DV's
+
+## Plan for Data visualization
+
+## Conclusion
+
+
+
