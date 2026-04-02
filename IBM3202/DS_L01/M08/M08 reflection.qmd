@@ -3,7 +3,7 @@ title: "M08-Reflection Essay-Advanced Data Types"
 subtitle: "Revealjs Presentation"
 author: "Allen Cosme"
 institute: "IBM3202, Cal Poly Pomona"
-date: "`today()`"
+date: "`r Sys.Date()`"
 format: 
   revealjs:
     theme: serif
@@ -30,14 +30,110 @@ execute:
   freeze: auto
 ---
 
-In Step 1, Dr. Dave Robinson demonstrated how you can deal with various data types using string, forecast, and lubricate packages. Pick three functions he used and how it helped him achieve his wrangling goals.
+## In Step 1, Dr. Dave Robinson demonstrated how you can deal with various data types using string, forecast, and lubricate packages. Pick three functions he used and how it helped him achieve his wrangling goals.
 
-Summarize the presentation by Dr. Pat Scholoss, a Professor at the University of Michigan, on how to deal with date data in Step 2. How much were you able to understand his presentation? compare his style with Dave Robinson's. What do you like or dislike?
+1. 'str_remove()' (from the stringr package)
 
-In Step 3, I introduced the common usage of gtsummary, which can be useful for school work. Summarize the package's capabilities as explained. How may the {gtsummary} benefit you for your school work or career? In Step 4, you watched the extended presentation of the {gtsummary} package by Dr. Daniel Dsjoberg, the very creator of the package. How does it differ from gt and gtExtras? Give three things you learned newly that were not explained in the lecture in Step 3.
+- Wrangling Goal: Data Cleaning and Label Refinement.
 
-In Step 5, you explored my advanced codebook. Pick one new interesting function from each of the three topics -- strings, factor, and date-time -- that was not introduced in M07. Describe what they are and what they can do for you. While doing so, use actual codes and outputs.
+- How it helped: The HBCU dataset contained categorical strings for race and ethnicity that often had superscript footnote numbers (e.g., "Black 1" or "White 2"). Robinson used str_remove() to strip these trailing digits from the text. This was essential for correctly grouping identical categories and ensuring the labels looked professional when plotted on the final visualization.
 
-I will repeat this again here. Data wrangling is like laying a foundation/basement for a building, while visualization is building a structure above the basement. working in a basement is not a glamorous job at all. No one notices it; people will see what they can see above the ground and judge it, but without the hard work you did in the basement, the building will never stand well. Wrangling with strings and date-time data is particularly hard because we don't get to use it as often as we use numeric data. However, you will get to use factors often, so get used to them soon.
+2. fct_reorder() (from the forcats package)
 
-What did you like the most about working with the tools you learned in this module? Elaborate on your point. By this time, I hope you found a way to deal with your challenges well. If you still have a problem and want to consult with me, you can come to see me during my office hours. How much time have you been able to study for this module? Which steps have you been able to study thoroughly?
+- Wrangling Goal: Logical Sorting for Visualization.
+
+- How it helped: By default, R sorts categorical data (factors) alphabetically. When plotting enrollment trends over time for different groups, an alphabetical legend often doesn't match the order of the lines on the graph. Robinson used fct_reorder() to sort the race/ethnicity categories based on their enrollment values (usually the most recent year's data). This ensured that the legend and the lines in the plot appeared in the same vertical order, making the chart much more intuitive for viewers to read.
+
+3. make_date() or ymd() (from the lubridate package)
+
+- Wrangling Goal: Time-Series Formatting.
+
+- How it helped: The enrollment data uses years (e.g., 1976, 1980) to represent time. While these are numbers, Robinson often treats them as formal date objects using lubridate functions. By converting the year into a date (e.g., make_date(year, 1, 1)), he can take advantage of ggplot2's scale_x_date() features. This allows him to easily format the x-axis with specific intervals (like 5-year gaps) and better handle time-series calculations if the data involves more precise dates later on.
+
+## Summarize the presentation by Dr. Pat Scholoss, a Professor at the University of Michigan, on how to deal with date data in Step 2. How much were you able to understand his presentation? compare his style with Dave Robinson's. What do you like or dislike?
+
+The core of the presentation is about transforming raw, fragmented time data into a cohesive Date object that R can understand. Key takeaways include:
+
+- Date Synthesis: He demonstrates how to use make_date() from the lubridate package to combine separate columns (like Year, Month, and Day) into a single functional date.
+
+- The "Dummy Year" Trick: To compare different years on the same plot (overlaying them), he creates a "common date" by forcing all data to appear as if they happened in the same year (e.g., 2020). This allows for a direct seasonal comparison.
+
+- Visual Refinement: He uses scale_x_date() in ggplot2 to format the x-axis, showing how to change "01" to "Jan" or customize the frequency of breaks on the axis.
+
+- Smoothing Data: He uses geom_smooth() to cut through the "noise" of daily temperature fluctuations to see the actual warming or cooling trends.
+
+What I Like:
+From Pat Schloss: I love his focus on reproducibility. He doesn't just show you the code; he shows you how to structure it so that if your data updates next year, the code still works. His explanation of scale_x_date is much clearer for beginners.
+
+From Dave Robinson: I like his agility. He uses fct_reorder() (from forcats) in a way that feels like a superpower—instantly making a messy chart readable by sorting categories by value.
+
+What I Dislike:
+Regarding Pat Schloss: His pace can sometimes feel a bit slow if you are already familiar with R basics. He spends a lot of time on minor formatting that might feel tedious to some.
+
+Regarding Dave Robinson: He moves so quickly that it is easy to miss a pipe (%>%) or a specific argument. If you aren't paused and rewinding, you might lose the "thread" of his logic.
+
+## In Step 3, I introduced the common usage of gtsummary, which can be useful for school work. Summarize the package's capabilities as explained. How may the {gtsummary} benefit you for your school work or career? In Step 4, you watched the extended presentation of the {gtsummary} package by Dr. Daniel Dsjoberg, the very creator of the package. How does it differ from gt and gtExtras? Give three things you learned newly that were not explained in the lecture in Step 3.
+
+The lecture attached to step 3 highlights {gtsummary} as a "one-stop-shop" for creating publication-ready tables. Its primary capabilities include:Descriptive Statistics: Using tbl_summary() to automatically calculate means, medians, and percentages while identifying variable types (categorical vs. continuous).Hypothesis Testing: Easily adding p-values (add_p()) or calculating differences between groups (add_difference()).Regression Modeling: Using tbl_regression() to summarize complex models (OLS, Logistic, etc.) into clean tables with reference rows for categorical variables.Table Management: The ability to "stack" tables on top of each other or "merge" them side-by-side to compare different models or datasets.Specialized Data: Handling survey data and cross-tabulations (tbl_cross()) for more specific research needs.Benefits for School and CareerAccuracy & Integrity: In school work (like a thesis or lab report), it eliminates the "human error" of manual copy-pasting from the R console to Word or Excel. If your data changes, your table updates instantly.Professional Efficiency: In a career setting, such as marketing analysis or clinical research, you can move from a raw dataset to a "Journal-ready" table in a single line of code. It allows you to focus on interpreting the data rather than fighting with table borders and alignment.
+
+In the extended presentation by Dr. Daniel Sjoberg for step 4, the distinction between these three packages is made clear:{gt}: This is the engine. It is the "Grammar of Tables" that provides the low-level tools to build any table from scratch (headers, footers, styling).{gtsummary}: This is the analyst. It is a high-level wrapper specifically designed for statistics. It does the math for you and uses {gt} behind the scenes to display it.{gtExtras}: This is the decorator. It provides pre-made themes (like New York Times or ESPN styles) and "visual widgets" like sparklines and heatmaps that enhance the aesthetic appeal of {gt} tables.Three New Things Learned from Dr. Sjoberg (Step 4)While Step 3 covered the basics of building tables, Dr. Sjoberg’s extended talk typically reveals deeper functionality:inline_text() Reporting: You can pull a specific statistic (like a p-value or a mean) directly from a {gtsummary} table and drop it into a sentence in your Quarto/Markdown report. This ensures your written text always matches your table data perfectly.add_global_p() for Categorical Variables: Instead of having three separate p-values for a variable like "Education Level" (High School, College, Grad), this function calculates a single "global" p-value for the entire variable, which is more statistically rigorous for research papers.add_glance_source_note(): This allows you to automatically append model-level metadata—such as $R^2$, AIC, or the number of observations—to the bottom of a regression table, providing a complete picture of the model’s fit without extra manual steps.
+
+## In Step 5, you explored my advanced codebook. Pick one new interesting function from each of the three topics -- strings, factor, and date-time -- that was not introduced in M07. Describe what they are and what they can do for you. While doing so, use actual codes and outputs.
+
+1. Strings: str_squish()
+While you likely saw str_trim() (which removes spaces from the ends of a string), str_squish() is the "heavy-duty" version for messy data.
+
+What it is: It removes leading and trailing whitespace and reduces multiple internal spaces into a single space.
+
+What it does for you: It is a lifesaver when dealing with web-scraped data or manually entered text where people accidentally hit the spacebar twice.
+
+Code Example:
+
+```{r}
+library(stringr)
+messy_string <- "  This   is   a   messy   string.  "
+clean_string <- str_squish(messy_string)
+clean_string
+```
+
+2. Factors: fct_reorder2()
+You previously used fct_reorder() to sort bar charts. However, fct_reorder2() is specifically designed for line charts.
+
+What it is: It reorders factor levels based on the values of two other variables (usually the x-axis and y-axis).
+
+What it does for you: In a line chart with multiple categories (like marital status over time), fct_reorder2() ensures that the order of the labels in your legend matches the vertical order of the lines at the end of the plot. This prevents the "eye-darting" effect where you have to constantly look back and forth to match colors.
+
+Code Example:
+
+```{r}
+library(forcats)
+library(ggplot2)
+# Sample data
+by_age <- data.frame(
+  age = rep(20:60, each = 3),
+  prop = runif(123, 0, 1),
+  marital = rep(c("Single", "Married", "Divorced"), times = 41)
+)
+```
+
+3. Date-Time: floor_date()
+While ymd() helps you create dates, floor_date() helps you aggregate them.
+
+What it is: It rounds a date down to the nearest boundary of a specified unit (e.g., week, month, or year).
+
+What it does for you: If you have data recorded every second or every day, but you want to create a chart showing "Monthly Trends," you can't just group by the raw date. floor_date() "snaps" every day in January to "January 1st," making it easy to summarize the data.
+
+Code Example:
+
+```{r}
+library(lubridate)
+# Sample date data
+dates <- ymd("2020-01-15", "2020-02-20", "2020-03-10")
+# Floor to the nearest month
+floored_dates <- floor_date(dates, unit = "month")
+floored_dates
+```
+
+## What did you like the most about working with the tools you learned in this module? Which steps have you been able to study thoroughly?
+
+What I liked most about working with the tools in this module is the ability to transform messy, real-world data into clean, insightful visualizations and tables with just a few lines of code. The combination of string manipulation, factor reordering, and date handling allows me to take raw datasets that might be riddled with inconsistencies and turn them into polished outputs that are not only informative but also visually appealing. This is particularly satisfying because it bridges the gap between data science and storytelling—allowing me to communicate complex trends in a way that is accessible to a wider audience. 
