@@ -81,11 +81,34 @@ data |>
 -   **Research Objective**: To Find Researcher’s Professionalism
 
 -   **Hypothesis**: Researcher’s professionalism will make people more willing to give their quality input on the survey. Research Question: How does a Researcher’s professionalism help the honesty of the research?
+
 ## IV's and DV's
+
+### Independent Variable (IV)
+
+- **Researcher professionalism** (e.g., tone of communication, clarity of instructions, presentation quality)
+
+### Dependent Variables (DV’s)
+
+- Honesty of responses
+- Quality of responses (e.g., completeness, effort, detail)
+
 
 ## Plan for Data wrangling
 
+- **Data Structuring:** Organize the dataset into a tidy format
+- **Creating New Variables:** Create a professionalism score by combining multiple survey items related to professionalism
+-  **Data Cleaning:** Remove incomplete or invalid survey responses, and check for duplicate entries and remove them
+
 ## Plan for Data visualization
+
+To show off my findings effectively, I will use:
+
+1) **Bar Charts:** Compare levels of perceived professionalism across respondents
+Show distribution of honesty levels
+2) **Scatter Plot:** Show the relationship between professionalism score (IV) and response quality/honesty (DV)
+3) **Histogram:** Display the distribution of response quality scores
+Identify patterns such as skewness or clustering
 
 ## RQ3 / H3
 
