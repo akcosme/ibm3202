@@ -1,4 +1,3 @@
----
 project:
   type: website
   output-dir: docs
@@ -20,18 +19,3 @@ format:
   html:
     theme: cosmo
     toc: true
----
-
-my-quarto-website/
-
-├── _quarto.yml
-
-├── homepage.qmd
-
-├── dashboard.qmd
-
-├── shiny-apps.qmd
-
-├── shiny-live.qmd
-
-└── images/
