@@ -1,0 +1,48 @@
+---
+title: "Essay on Shiny Apps"
+---
+
+# Essay on Shiny Apps
+
+## Introduction
+
+Shiny is an R package that allows users to build interactive web applications directly from R. It is especially useful for data analysis, visualization, and dashboards because it allows people to interact with data through a web browser without needing to understand programming.
+
+## What Is a Shiny App?
+
+A Shiny app is a web application made with R. It usually has two main parts:
+
+1. **User Interface (UI)**  
+   This is the part that users see and interact with, such as buttons, sliders, text boxes, and charts.
+
+2. **Server**  
+   This is the part that contains the logic of the app. It tells the app what to do when the user interacts with it.
+
+These two parts work together to create an interactive experience.
+
+## Basic Structure of a Shiny App
+
+A simple Shiny app includes:
+
+- `ui`: defines the layout and input/output objects
+- `server`: defines how inputs are processed and outputs are created
+- `shinyApp(ui, server)`: runs the app
+
+Example:
+
+```r
+library(shiny)
+
+ui <- fluidPage(
+  titlePanel("My First Shiny App"),
+  sliderInput("num", "Choose a number:", 1, 100, 50),
+  textOutput("result")
+)
+
+server <- function(input, output) {
+  output$result <- renderText({
+    paste("You selected", input$num)
+  })
+}
+
+shinyApp(ui = ui, server = server)
