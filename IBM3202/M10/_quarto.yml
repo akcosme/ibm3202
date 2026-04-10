@@ -23,9 +23,15 @@ format:
 ---
 
 my-quarto-website/
+
 ├── _quarto.yml
-├── index.qmd
+
+├── homepage.qmd
+
 ├── dashboard.qmd
+
 ├── shiny-apps.qmd
+
 ├── shiny-live.qmd
+
 └── images/
