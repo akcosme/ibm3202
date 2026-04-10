@@ -1,0 +1,62 @@
+---
+title: "Dashboard"
+format:
+  dashboard:
+    orientation: rows
+---
+
+```{r}
+library(ggplot2)
+library(dplyr)
+
+data(mtcars)
+mtcars$cyl <- as.factor(mtcars$cyl)
+```
+
+```{r}
+head(mtcars)
+```
+
+```{r}
+ggplot(mtcars, aes(x = cyl, y = mpg, fill = cyl)) +
+  geom_boxplot() +
+  labs(
+    title = "Miles Per Gallon by Cylinder Count",
+    x = "Cylinders",
+    y = "Miles Per Gallon"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+
+```{r}
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +
+  labs(
+    title = "Horsepower vs Miles Per Gallon",
+    x = "Horsepower",
+    y = "Miles Per Gallon",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+ggplot(mtcars, aes(x = hp, y = mpg, color = cyl)) +
+  geom_point(size = 3) +
+  labs(
+    title = "Horsepower vs Miles Per Gallon",
+    x = "Horsepower",
+    y = "Miles Per Gallon",
+    color = "Cylinders"
+  ) +
+  theme_minimal()
+```
+
+```{r}
+mtcars %>%
+  group_by(cyl) %>%
+  summarise(avg_mpg = mean(mpg)) %>%
+  knitr::kable(col.names = c("Cylinders", "Average MPG"))
+```
+---
