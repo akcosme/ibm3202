@@ -23,10 +23,15 @@ The website includes the following four pages:
 ```text
 my-quarto-website/
 ├── _quarto.yml
+
 ├── index.qmd
+
 ├── dashboard.qmd
+
 ├── shiny-apps.qmd
+
 ├── shiny-live.qmd
+
 └── images/
     └── my-photo.jpg
 ```
