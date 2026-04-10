@@ -4,7 +4,7 @@ title: "Home Page"
 
 # Welcome
 
-![My Photo](allen cosme headshot.png){width=250px}
+![My Photo](allen%20cosme%20headshot.png){width=250px}
 
 ## About Me
 
