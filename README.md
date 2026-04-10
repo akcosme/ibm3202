@@ -29,3 +29,4 @@ my-quarto-website/
 ├── shiny-live.qmd
 └── images/
     └── my-photo.jpg
+```
