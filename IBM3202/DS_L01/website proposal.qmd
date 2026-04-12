@@ -36,65 +36,60 @@ This presentation proposes a professional portfolio website that highlights my b
 
 ### Proposal Goals
 
-- Build a clean and modern personal brand
-- Showcase academic and project-based experience
-- Highlight analytical, strategic, and communication skills
-- Create a site that can support internships, networking, and future job applications
-- Present my work in a format that is easy to explore and visually professional
+-   Build a clean and modern personal brand
+-   Showcase academic and project-based experience
+-   Highlight analytical, strategic, and communication skills
+-   Create a site that can support internships, networking, and future job applications
+-   Present my work in a format that is easy to explore and visually professional
 
 ::: notes
 Open by explaining that this website is more than a class assignment. It is meant to function as a professional asset for internships, job applications, and networking.
 :::
 
----
+------------------------------------------------------------------------
 
 ## Why I Need This Website
 
 A portfolio website gives me a central place to present who I am, what I have worked on, and what I can contribute.
 
-- A resume is concise, but limited
-- A website gives space for projects, visuals, and storytelling
-- Employers can quickly understand my strengths and interests
-- It helps me stand out from other candidates with similar coursework
-- It gives my academic work a professional presentation format
+-   A resume is concise, but limited
+-   A website gives space for projects, visuals, and storytelling
+-   Employers can quickly understand my strengths and interests
+-   It helps me stand out from other candidates with similar coursework
+-   It gives my academic work a professional presentation format
 
----
+------------------------------------------------------------------------
 
 ## Target Audience
 
-::: columns
-
-:::: column
+::::: columns
+::: column
 ### Primary Audience
 
-- Recruiters
-- Hiring managers
-- Internship coordinators
-- Professors and mentors
-- Professional connections
+-   Recruiters
+-   Hiring managers
+-   Internship coordinators
+-   Professors and mentors
+-   Professional connections
+:::
 
-::::
-
-:::: column
+::: column
 ### Secondary Audience
 
-- Classmates
-- Student organizations
-- Graduate program reviewers
-- Anyone interested in my work in business and analytics
-
-::::
-
+-   Classmates
+-   Student organizations
+-   Graduate program reviewers
+-   Anyone interested in my work in business and analytics
 :::
+:::::
 
 ::: notes
 Mention that the site is designed to be employer-facing first, but still useful for networking and academic presentation.
 :::
 
----
+------------------------------------------------------------------------
 
 ## Website Purpose
-
 
 ### Main Purpose
 
@@ -102,58 +97,58 @@ The website will function as a digital portfolio that communicates my profession
 
 ### What visitors should learn quickly
 
-- Who I am
-- What I study
-- What type of work interests me
-- What projects I have completed
-- What skills I can bring to a team
-- How to contact me
+-   Who I am
+-   What I study
+-   What type of work interests me
+-   What projects I have completed
+-   What skills I can bring to a team
+-   How to contact me
 
----
+------------------------------------------------------------------------
 
 ## Site Map
 
 ## 1. Home Page
 
-- Short introduction
-- Professional headshot or personal image
-- Career interests
-- Call-to-action buttons:
-  - View Resume
-  - Explore Projects
-  - Contact Me
+-   Short introduction
+-   Professional headshot or personal image
+-   Career interests
+-   Call-to-action buttons:
+    -   View Resume
+    -   Explore Projects
+    -   Contact Me
 
 ## 2. About Me
 
-- Educational background
-- Professional goals
-- Personal brand statement
-- Strengths and values
+-   Educational background
+-   Professional goals
+-   Personal brand statement
+-   Strengths and values
 
 ## 3. Projects
 
-- Featured academic and team projects
-- Business analysis
-- Marketing strategy
-- International business/export planning
-- Data/statistics project work
+-   Featured academic and team projects
+-   Business analysis
+-   Marketing strategy
+-   International business/export planning
+-   Data/statistics project work
 
 ## 4. Resume
 
-- Downloadable PDF resume
-- Experience
-- Leadership
-- Skills
-- Certifications
+-   Downloadable PDF resume
+-   Experience
+-   Leadership
+-   Skills
+-   Certifications
 
 ## 5. Contact Page
 
-- Email
-- LinkedIn
-- GitHub if applicable
-- Professional message form
+-   Email
+-   LinkedIn
+-   GitHub if applicable
+-   Professional message form
 
----
+------------------------------------------------------------------------
 
 ## Home Page Concept
 
@@ -161,18 +156,18 @@ The home page should immediately communicate professionalism, clarity, and direc
 
 ### Key content
 
-  - Name and title  
-    Example: **Allen Kian Cosme | Business Student | Strategy, Marketing, and Analytics**
-  - One-sentence professional summary
-  - Buttons for quick navigation
-  - Clean hero image or strong visual banner
-  - Minimal but polished layout
+-   Name and title\
+    Example: **Allen Kian Cosme \| Business Student \| Strategy, Marketing, and Analytics**
+-   One-sentence professional summary
+-   Buttons for quick navigation
+-   Clean hero image or strong visual banner
+-   Minimal but polished layout
 
 ### Sample intro text
 
 > I am a business student building experience in strategy, marketing, analytics, and global business through team-based research and applied projects.
 
----
+------------------------------------------------------------------------
 
 ## About Me Page
 
@@ -180,28 +175,28 @@ This page should tell a clear story about who I am and where I want to go.
 
 ### Content to include
 
-- Current school: **Cal Poly Pomona**
-- Major: **International Business**
-- Expected graduation: **December 2026**
-- Career interests:
-  - Marketing
-  - Business strategy
-  - Data-informed decision making
-  - International business
-- Short paragraph on goals and work style
+-   Current school: **Cal Poly Pomona**
+-   Major: **International Business**
+-   Expected graduation: **December 2026**
+-   Career interests:
+    -   Marketing
+    -   Business strategy
+    -   Data-informed decision making
+    -   International business
+-   Short paragraph on goals and work style
 
 ### Suggested tone
 
-- Professional
-- Motivated
-- Reflective
-- Career-focused
+-   Professional
+-   Motivated
+-   Reflective
+-   Career-focused
 
 ::: notes
 This page should sound more personal than the resume but still polished. Keep it concise and confident.
 :::
 
----
+------------------------------------------------------------------------
 
 ## Resume Integration
 
@@ -209,21 +204,21 @@ This section should directly reflect my resume.
 
 ### Add these items from your resume
 
-- Professional summary
-- Education
-- Work experience
-- Leadership or extracurricular involvement
-- Skills
-- Awards or certifications
+-   Professional summary
+-   Education
+-   Work experience
+-   Leadership or extracurricular involvement
+-   Skills
+-   Awards or certifications
 
 ### Resume features on the site
 
-- Embedded PDF viewer
-- Download button
-- Short highlights beside the resume
-- Mobile-friendly formatting
+-   Embedded PDF viewer
+-   Download button
+-   Short highlights beside the resume
+-   Mobile-friendly formatting
 
----
+------------------------------------------------------------------------
 
 ## Featured Project Strategy
 
@@ -231,19 +226,17 @@ The project section will be the strongest part of the portfolio because it demon
 
 ### Project categories
 
-- Strategic management
-- Marketing planning
-- International business/export analysis
-- Equity research
-- Business statistics / analytics
+-   Strategic management
+-   Marketing planning
+-   International business/export analysis
+-   Equity research
+-   Business statistics / analytics
 
 ### What each project card should show
 
-- Project title
-- Short summary
-- Tools or methods used
-- My role / contribution
-- Key takeaways
-- Link to report, slides, or visual summary
-
-
+-   Project title
+-   Short summary
+-   Tools or methods used
+-   My role / contribution
+-   Key takeaways
+-   Link to report, slides, or visual summary
