@@ -1,5 +1,8 @@
-type: website
+ project:
+  type: website
   output-dir: docs
+
+website:
   title: "M10: Hands-on Practice Assignment"
   navbar:
     left:
@@ -11,8 +14,8 @@ type: website
         text: Essay on Shiny Apps
       - href: shiny-live.qmd
         text: Essay on Shiny Live
-  format:
+
+format:
   html:
     theme: cosmo
     toc: true
-
