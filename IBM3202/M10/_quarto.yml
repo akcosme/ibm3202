@@ -1,4 +1,4 @@
-  type: website
+type: website
   output-dir: docs
   title: "M10: Hands-on Practice Assignment"
   navbar:
