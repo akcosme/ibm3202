@@ -1,0 +1,128 @@
+[
+  {
+    "objectID": "shiny-apps.html",
+    "href": "shiny-apps.html",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "Shiny is an R package that allows users to build interactive web applications directly from R. It is especially useful for data analysis, visualization, and dashboards because it allows people to interact with data through a web browser without needing to understand programming.\n\n\n\nA Shiny app is a web application made with R. It usually has two main parts:\n\nUser Interface (UI)\nThis is the part that users see and interact with, such as buttons, sliders, text boxes, and charts.\nServer\nThis is the part that contains the logic of the app. It tells the app what to do when the user interacts with it.\n\nThese two parts work together to create an interactive experience.\n\n\n\nA simple Shiny app includes:\n\nui: defines the layout and input/output objects\nserver: defines how inputs are processed and outputs are created\nshinyApp(ui, server): runs the app\n\nExample:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"My First Shiny App\"),\n  sliderInput(\"num\", \"Choose a number:\", 1, 100, 50),\n  textOutput(\"result\")\n)\n\nserver &lt;- function(input, output) {\n  output$result &lt;- renderText({\n    paste(\"You selected\", input$num)\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "shiny-apps.html#introduction",
+    "href": "shiny-apps.html#introduction",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "Shiny is an R package that allows users to build interactive web applications directly from R. It is especially useful for data analysis, visualization, and dashboards because it allows people to interact with data through a web browser without needing to understand programming."
+  },
+  {
+    "objectID": "shiny-apps.html#what-is-a-shiny-app",
+    "href": "shiny-apps.html#what-is-a-shiny-app",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "A Shiny app is a web application made with R. It usually has two main parts:\n\nUser Interface (UI)\nThis is the part that users see and interact with, such as buttons, sliders, text boxes, and charts.\nServer\nThis is the part that contains the logic of the app. It tells the app what to do when the user interacts with it.\n\nThese two parts work together to create an interactive experience."
+  },
+  {
+    "objectID": "shiny-apps.html#basic-structure-of-a-shiny-app",
+    "href": "shiny-apps.html#basic-structure-of-a-shiny-app",
+    "title": "Essay on Shiny Apps",
+    "section": "",
+    "text": "A simple Shiny app includes:\n\nui: defines the layout and input/output objects\nserver: defines how inputs are processed and outputs are created\nshinyApp(ui, server): runs the app\n\nExample:\nlibrary(shiny)\n\nui &lt;- fluidPage(\n  titlePanel(\"My First Shiny App\"),\n  sliderInput(\"num\", \"Choose a number:\", 1, 100, 50),\n  textOutput(\"result\")\n)\n\nserver &lt;- function(input, output) {\n  output$result &lt;- renderText({\n    paste(\"You selected\", input$num)\n  })\n}\n\nshinyApp(ui = ui, server = server)"
+  },
+  {
+    "objectID": "shiny-live.html",
+    "href": "shiny-live.html",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Shiny Live is a serverless version of Shiny that allows Shiny-style applications to run directly in the browser. This means users can interact with applications without needing a separate R server running in the background.\n\n\n\nShiny Live is a way to create interactive applications that use Shiny concepts but are deployed as static websites. Instead of depending on a live server to process code, the application runs in the browser.\nThis makes Shiny Live especially useful for lightweight apps, educational demonstrations, and websites that need simpler deployment.\n\n\n\nTraditional Shiny apps require a server. The server handles reactivity, computations, and outputs. In contrast, Shiny Live is designed to work without a dedicated server.\n\n\n\nrequires an R server\nprocessing happens on the server side\nsupports more complex app behavior\noften deployed using Shiny Server or hosting services\n\n\n\n\n\ndoes not require a server in the same way\nruns directly in the browser\neasier to publish as a static website\nbetter for simpler applications\n\n\n\n\n\nShiny Live has several advantages:\n\neasier deployment\nworks well with static hosting\nno need to manage a server\nconvenient for sharing smaller interactive projects\nuseful for educational content and lightweight tools\n\n\n\n\nThere are also limitations:\n\nnot as powerful as full Shiny for complex apps\nmay not support all features of traditional Shiny\nbrowser-based execution can limit heavy computations\nmay be less suitable for advanced or data-intensive applications\n\n\n\n\nIn comparison, traditional Shiny apps are more powerful and flexible, especially for professional dashboards and advanced tools. However, they usually require more setup and hosting support.\nShiny Live is more convenient for simple interactive content because it is easier to publish and share. If the goal is simplicity and easy deployment, Shiny Live is a strong option. If the goal is advanced functionality, traditional Shiny is usually better.\n\n\n\nShiny Live is a serverless approach to building interactive applications inspired by Shiny. It makes deployment easier and is useful for simpler projects, but it does not fully replace traditional Shiny for more advanced applications. Both tools are valuable, and the best choice depends on the needs of the project."
+  },
+  {
+    "objectID": "shiny-live.html#introduction",
+    "href": "shiny-live.html#introduction",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Shiny Live is a serverless version of Shiny that allows Shiny-style applications to run directly in the browser. This means users can interact with applications without needing a separate R server running in the background."
+  },
+  {
+    "objectID": "shiny-live.html#what-is-shiny-live",
+    "href": "shiny-live.html#what-is-shiny-live",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Shiny Live is a way to create interactive applications that use Shiny concepts but are deployed as static websites. Instead of depending on a live server to process code, the application runs in the browser.\nThis makes Shiny Live especially useful for lightweight apps, educational demonstrations, and websites that need simpler deployment."
+  },
+  {
+    "objectID": "shiny-live.html#how-shiny-live-differs-from-traditional-shiny",
+    "href": "shiny-live.html#how-shiny-live-differs-from-traditional-shiny",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Traditional Shiny apps require a server. The server handles reactivity, computations, and outputs. In contrast, Shiny Live is designed to work without a dedicated server.\n\n\n\nrequires an R server\nprocessing happens on the server side\nsupports more complex app behavior\noften deployed using Shiny Server or hosting services\n\n\n\n\n\ndoes not require a server in the same way\nruns directly in the browser\neasier to publish as a static website\nbetter for simpler applications"
+  },
+  {
+    "objectID": "shiny-live.html#pros-of-shiny-live",
+    "href": "shiny-live.html#pros-of-shiny-live",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Shiny Live has several advantages:\n\neasier deployment\nworks well with static hosting\nno need to manage a server\nconvenient for sharing smaller interactive projects\nuseful for educational content and lightweight tools"
+  },
+  {
+    "objectID": "shiny-live.html#cons-of-shiny-live",
+    "href": "shiny-live.html#cons-of-shiny-live",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "There are also limitations:\n\nnot as powerful as full Shiny for complex apps\nmay not support all features of traditional Shiny\nbrowser-based execution can limit heavy computations\nmay be less suitable for advanced or data-intensive applications"
+  },
+  {
+    "objectID": "shiny-live.html#shiny-live-vs-shiny-apps",
+    "href": "shiny-live.html#shiny-live-vs-shiny-apps",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "In comparison, traditional Shiny apps are more powerful and flexible, especially for professional dashboards and advanced tools. However, they usually require more setup and hosting support.\nShiny Live is more convenient for simple interactive content because it is easier to publish and share. If the goal is simplicity and easy deployment, Shiny Live is a strong option. If the goal is advanced functionality, traditional Shiny is usually better."
+  },
+  {
+    "objectID": "shiny-live.html#conclusion",
+    "href": "shiny-live.html#conclusion",
+    "title": "Essay on Shiny live",
+    "section": "",
+    "text": "Shiny Live is a serverless approach to building interactive applications inspired by Shiny. It makes deployment easier and is useful for simpler projects, but it does not fully replace traditional Shiny for more advanced applications. Both tools are valuable, and the best choice depends on the needs of the project."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home Page",
+    "section": "",
+    "text": "My Photo\n\n\n\n\nHello! My name is Allen Cosme. I am currently a student studying Business Administration at Cal Poly Pomona with and emphasis in internationl business.\n\n\n\nMy career aspiration is to build a successful career in business where I can use data, technology, and communication skills to solve real-world problems and help organizations make better decisions.\n\n\n\nHere are some of my current skills:\n\nCommunication\nTeamwork\nProblem-solving\nData analysis\nBusiness knowledge\nBasic coding in R\nDashboard creation using Quarto\n\n\n\n\n\nCal Poly Pomona\nMajor: Business\nCoursework related to data, business analysis, and technology\n\n\n\n\nThis website contains four pages:\n\nA home page introducing who I am\nA dashboard created with data of my choice\nAn essay explaining Shiny Apps\nAn essay explaining Shiny Live"
+  },
+  {
+    "objectID": "index.html#about-me",
+    "href": "index.html#about-me",
+    "title": "Home Page",
+    "section": "",
+    "text": "Hello! My name is Allen Cosme. I am currently a student studying Business Administration at Cal Poly Pomona with and emphasis in internationl business."
+  },
+  {
+    "objectID": "index.html#career-aspiration",
+    "href": "index.html#career-aspiration",
+    "title": "Home Page",
+    "section": "",
+    "text": "My career aspiration is to build a successful career in business where I can use data, technology, and communication skills to solve real-world problems and help organizations make better decisions."
+  },
+  {
+    "objectID": "index.html#skills",
+    "href": "index.html#skills",
+    "title": "Home Page",
+    "section": "",
+    "text": "Here are some of my current skills:\n\nCommunication\nTeamwork\nProblem-solving\nData analysis\nBusiness knowledge\nBasic coding in R\nDashboard creation using Quarto"
+  },
+  {
+    "objectID": "index.html#education",
+    "href": "index.html#education",
+    "title": "Home Page",
+    "section": "",
+    "text": "Cal Poly Pomona\nMajor: Business\nCoursework related to data, business analysis, and technology"
+  },
+  {
+    "objectID": "index.html#website-overview",
+    "href": "index.html#website-overview",
+    "title": "Home Page",
+    "section": "",
+    "text": "This website contains four pages:\n\nA home page introducing who I am\nA dashboard created with data of my choice\nAn essay explaining Shiny Apps\nAn essay explaining Shiny Live"
+  }
+]
