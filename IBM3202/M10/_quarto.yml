@@ -1,9 +1,9 @@
- project:
+project:
   type: website
   output-dir: docs
 
 website:
-  title: "M10: Hands-on Practice Assignment"
+  title: "My Quarto Website"
   navbar:
     left:
       - href: index.qmd
