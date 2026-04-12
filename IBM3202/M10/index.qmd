@@ -4,9 +4,9 @@ title: "Home"
 
 # Welcome
 
-![My Photo](allen%20cosme%20headshot.png){width=250px}
-
 ## About Me
+
+![](allen%20cosme%20headshot.png)
 
 Hello! My name is **Allen Cosme**. I am currently a student studying **Business Administration** at **Cal Poly Pomona** with and emphasis in internationl business.
 
@@ -18,13 +18,12 @@ My career aspiration is to build a successful career in business where I can use
 
 Here are some of my current skills:
 
-- Communication
-- Teamwork
-- Problem-solving
-- Data analysis
-- Business knowledge
-- Basic coding in R
-- Dashboard creation using Quarto
+-   Communication
+-   Teamwork
+-   Problem-solving
+-   Data analysis
+-   Business knowledge
+-   Basic coding in R-   Dashboard creation using Quarto
 
 ## Education
 
@@ -36,7 +35,7 @@ Here are some of my current skills:
 
 This website contains four pages:
 
-1. A home page introducing who I am
-2. A dashboard created with data of my choice
-3. An essay explaining Shiny Apps
-4. An essay explaining Shiny Live
+1.  A home page introducing who I am
+2.  A dashboard created with data of my choice
+3.  An essay explaining Shiny Apps
+4.  An essay explaining Shiny Live
